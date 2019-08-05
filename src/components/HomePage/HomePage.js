@@ -1,19 +1,52 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
+import { HashRouter as Router, Route, Redirect, Switch, } from 'react-router-dom';
 
 // this could also be written with destructuring parameters as:
 // const UserPage = ({ user }) => (
 // and then instead of `props.user.username` you could use `user.username`
-const HomePage = (props) => (
-  <div>
-    <h1 id="welcome">
-      Welcome, { props.user.username }!
-    </h1>
-    <p>Your ID is: {props.user.id}</p>
-    <LogOutButton className="log-in" />
-  </div>
-);
+class HomePage extends Component {
+
+BuildARoutine = () => {
+  this.props.history.push('/build')
+}
+
+weeklyRoutine = () => {
+  this.props.history.push('/weekly')
+
+}
+
+routineDatabase = () => {
+  this.props.history.push('/database')
+}
+
+  render() {
+    return (
+      <>
+        <div>
+          <h1 id="welcome">
+            Welcome, {this.props.user.username}!
+          </h1>
+          <p>Your ID is: {this.props.user.id}</p>
+          <LogOutButton className="log-in" />
+        </div>
+        <div>
+          <button onClick={this.BuildARoutine}>Build A Routine</button>
+        </div>
+        <div>
+          <button onClick={this.weeklyRoutine}>Weekly Routine</button>
+        </div>
+        <div>
+          <button onClick={this.routineDatabase}>Routine Database</button>
+        </div>
+      </>
+
+    )
+  }
+
+
+};
 
 // Instead of taking everything from state, we just want the user info.
 // if you wanted you could write this code like this:
