@@ -8,7 +8,7 @@ import React from 'react';
 const InfoPage = () => (
   <div>
     <p>
-      Info Page
+      Weekly Schedule
     </p>
   </div>
 );

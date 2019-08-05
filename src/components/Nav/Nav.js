@@ -7,7 +7,7 @@ import './Nav.css';
 const Nav = (props) => (
   <div className="nav">
     <Link to="/home">
-      <h2 className="nav-title">Prime Solo Project</h2>
+      <h2 className="nav-title">Gym APP</h2>
     </Link>
     <div className="nav-right">
       <Link className="nav-link" to="/home">
@@ -19,16 +19,18 @@ const Nav = (props) => (
       {/* Show the link to the info page and the logout button if the user is logged in */}
       {props.user.id && (
         <>
-          <Link className="nav-link" to="/info">
-            Info Page
-          </Link>
-          <LogOutButton className="nav-link"/>
+          <Link className="nav-link" to='/build'> Build Routine</Link>
+          <Link className="nav-link" to='/weekly'> Weekly Schedule</Link>
+          
+          
         </>
+
       )}
       {/* Always show this link since the about page is not protected */}
       <Link className="nav-link" to="/about">
-        About
+        Routine Database
       </Link>
+      <LogOutButton className="nav-link" />
     </div>
   </div>
 );
