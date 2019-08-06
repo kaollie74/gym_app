@@ -10,7 +10,7 @@ body {
 
 form {
     background-color: #dbd5d5;
-    width: 30%;
+    width: 100%;
     height: 250px;
     margin: 20px auto;
     padding: 25px;
@@ -52,3 +52,9 @@ input {
     background-color: yellow;
     
 }
+
+.routineBtns {
+    margin-left: 400px;
+    
+}
+

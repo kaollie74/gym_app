@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   HashRouter as Router,
   Route,
@@ -6,23 +6,25 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
+// Component Routes 
 import RoutineDatabasePage from '../RoutineDatabasePage/RoutineDatabasePage';
 import HomePage from '../HomePage/HomePage';
 import WeeklyPage from '../WeeklyPage/WeeklyPage';
-import BuildRoutinePage from '../BuildRoutine/BuildRoutine';
+import RoutineNamePage from '../RoutineNamePage/RoutineNamePage';
+import RoutinePage from '../RoutinePage/RoutinePage';
 
 import './App.css';
 
 class App extends Component {
-  componentDidMount () {
-    this.props.dispatch({type: 'FETCH_USER'})
+  componentDidMount() {
+    this.props.dispatch({ type: 'FETCH_USER' })
   }
 
   render() {
@@ -56,18 +58,28 @@ class App extends Component {
               path="/weekly"
               component={WeeklyPage}
             />
-            <>
-            <ProtectedRoute 
-            exact path ="/build" 
-            component={BuildRoutinePage}/>
-            </>
+            
+              <ProtectedRoute
+                exact
+                path="/name"
+                component={RoutineNamePage} />
+            
+
+            
+              <ProtectedRoute
+                exact
+                path="/routine"
+                component={RoutinePage} />
+            
+
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
           <Footer />
         </div>
       </Router>
-  )}
+    )
+  }
 }
 
 export default connect()(App);

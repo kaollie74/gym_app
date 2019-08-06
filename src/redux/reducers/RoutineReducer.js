@@ -1,7 +1,9 @@
 const RoutineNameReducer = (state = {}, action) => {
   switch (action.type) {
-    case 'INSTILL_ROUTINE_NAME':
+    case 'SET_USER':
       return action.payload;
+    case 'UNSET_USER':
+      return {};
     default:
       return state;
   }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class BuildRoutinePage extends Component {
+class RoutineNamePage extends Component {
 
   state = {
     routineName: '',
@@ -10,12 +10,15 @@ class BuildRoutinePage extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log('In Handle Submit');
+    // run dispatch 
     this.props.dispatch({ type: 'SET_ROUTINE_NAME', payload: this.state })
-    // this.setState({
-    //   routineName: '',
-    //   day: ''
-    // })
+
+    this.setState({
+      routineName: '',
+      day: ''
+    })
+
+    this.props.history.push('/routine')
 
   }
 
@@ -30,8 +33,7 @@ class BuildRoutinePage extends Component {
 
 
   render() {
-
-    console.log('this is state', this.state)
+    
     return (
       <>
         <h1>Build Routine Name and Day</h1>
@@ -60,4 +62,4 @@ class BuildRoutinePage extends Component {
 
 
 
-export default connect()(BuildRoutinePage);
+export default connect()(RoutineNamePage);
