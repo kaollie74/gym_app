@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { thisExpression } from '@babel/types';
+import { connect } from 'react-redux';
 
 class BuildRoutinePage extends Component {
 
@@ -11,7 +11,11 @@ class BuildRoutinePage extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     console.log('In Handle Submit');
-    this.props.dispatch({type: 'SET_ROUTINE_NAME', payload: this.state})
+    this.props.dispatch({ type: 'SET_ROUTINE_NAME', payload: this.state })
+    // this.setState({
+    //   routineName: '',
+    //   day: ''
+    // })
 
   }
 
@@ -54,4 +58,6 @@ class BuildRoutinePage extends Component {
   }
 }
 
-export default BuildRoutinePage;
+
+
+export default connect()(BuildRoutinePage);
