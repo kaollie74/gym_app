@@ -30,14 +30,14 @@ router.post('/name', (req,res)=> {
 // an individual exercise, sets, reps, etc..
 router.post('/activity', (req, res) => {
 
-  console.log('req.user.id', req.user.id);
+  //console.log('req.user.id', req.user.id);
   console.log('req.body', req.body);
-  console.log('req.routineName.id', req.routineName.id)
+  //console.log('req.routineSingle.id', req.routineSingle.id)
   
 
   const sqlText = `INSERT INTO "activity" ("body_part","exercise", "sets", "reps", "comment", "routine_id")
                     Values($1, $2, $3, $4, $5, $6);`
-  values = [req.body.body_part, req.body.exercise, req.body.sets, req.body.reps, req.body.comments, req.routineName.id]
+  values = [req.body.body_part, req.body.exercise, req.body.sets, req.body.reps, req.body.comments, req.body.routine_id]
   pool.query(sqlText, values)
     .then((response) => {
       res.sendStatus(201)
@@ -75,7 +75,7 @@ router.get('/name/:id', (req, res) => {
   pool.query(sqlText, value)
     .then((response) => {
 
-      res.send(response.rows)
+      res.send(response.rows[0])
     })
     .catch((error) => {
       console.log('Error getting Routine from DB', error);

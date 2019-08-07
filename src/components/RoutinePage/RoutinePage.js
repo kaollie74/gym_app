@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { thisExpression } from '@babel/types';
 
 class RoutinePage extends Component {
 
@@ -36,7 +37,7 @@ class RoutinePage extends Component {
 
   handleChange = (event, propsName) => {
     this.setState({
-      routine_id: this.props.reduxStore.routineNames.id,
+      routine_id: this.props.reduxStore.routineSingle.id,
       [propsName]: event.target.value,
 
     })
@@ -70,9 +71,9 @@ class RoutinePage extends Component {
 
         </form>
 
-        {JSON.stringify(this.props.reduxStore.routineNames.id)}
-        <p>{this.props.reduxStore.routineNames.routineName} - {this.props.reduxStore.routineNames.day}</p>
-
+        {JSON.stringify(this.props.reduxStore.routineSingle)}
+        <h1>{this.props.reduxStore.routineSingle.routineName} - {this.props.reduxStore.routineSingle.day}</h1>
+          
       </>
     )
   }
