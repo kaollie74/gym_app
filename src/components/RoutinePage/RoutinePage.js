@@ -3,11 +3,8 @@ import { connect } from 'react-redux';
 
 class RoutinePage extends Component {
 
-  componentDidMount(){
-    this.props.dispatch({type:'FETCH_ROUTINE_NAME'})
-  }
-
   state = {
+    routine_id: '',
     body_part: '',
     exercise: '',
     sets: '',
@@ -19,30 +16,27 @@ class RoutinePage extends Component {
   handleSubmit = (event) => {
 
     event.preventDefault();
-    if (this.state.type !== '' && this.state.exercise_name !== '' && this.state.sets !== '' && this.state.reps !== ''){
-    // run dispatch 
-    this.props.dispatch({ type: 'POST_ACTIVITY', payload: this.state })
+    if (this.state.type !== '' && this.state.exercise_name !== '' && this.state.sets !== '' && this.state.reps !== '') {
+      // run dispatch 
+      this.props.dispatch({ type: 'POST_ACTIVITY', payload: this.state })
 
-    this.setState({
-      type: '',
-      exercise: '',
-      sets: '',
-      reps: '',
-      comments: '',
-    })
+      this.setState({
+        routine_id: '',
+        body_part: '',
+        exercise: '',
+        sets: '',
+        reps: '',
+        comments: '',
+      })
 
-  } else {
-    alert('Fill in all inputs except comments to proceed')
+    } else {
+      alert('Fill in all inputs except comments to proceed')
+    }
   }
-
-   
-
-  }
-
-
 
   handleChange = (event, propsName) => {
     this.setState({
+      routine_id: this.props.reduxStore.routineNames.id,
       [propsName]: event.target.value,
 
     })
@@ -50,15 +44,16 @@ class RoutinePage extends Component {
 
 
   render() {
-   console.log('State Is', this.state);
-   
+    console.log('State Is', this.state);
+
     return (
       <>
-        <h1>This is your Routine PAGE</h1>
+
+        {/* <h1>{this.props.reduxStore.routineName}</h1> */}
 
         <form>
-          
-          <select value={this.state.type} onChange={(event) => this.handleChange(event, 'body_part')} >
+
+          <select value={this.state.body_part} onChange={(event) => this.handleChange(event, 'body_part')} >
             <option value='default'>Select Body Part</option>
             <option value="Chest">Chest</option>
             <option value="Back">Back</option>
@@ -67,18 +62,16 @@ class RoutinePage extends Component {
             <option value="Shoulders">Shoulders</option>
             <option value="Legs">Legs</option>
           </select>
-          <input type='text' placeholder='Exercise Name' value={this.state.exercise_name} onChange={(event) => this.handleChange(event, 'exercise')} />
+          <input type='text' placeholder='Exercise Name' value={this.state.exercise} onChange={(event) => this.handleChange(event, 'exercise')} />
           <input type='number' placeholder='Sets' value={this.state.sets} onChange={(event) => this.handleChange(event, 'sets')} />
           <input type='number' placeholder='Reps' value={this.state.reps} onChange={(event) => this.handleChange(event, 'reps')} />
           <input type='text' placeholder='Comments' value={this.state.comments} onChange={(event) => this.handleChange(event, 'comments')} />
-
           <button onClick={this.handleSubmit}>Submit</button>
 
         </form>
 
-        {JSON.stringify(this.props.reduxStore.RoutineNameReducer)}
-
-
+        {JSON.stringify(this.props.reduxStore.routineNames.id)}
+        <p>{this.props.reduxStore.routineNames.routineName} - {this.props.reduxStore.routineNames.day}</p>
 
       </>
     )

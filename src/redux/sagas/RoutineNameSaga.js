@@ -4,7 +4,8 @@ import { put, takeEvery } from 'redux-saga/effects';
 // worker Saga: will be fired on "FETCH_USER" actions
 function* RoutineNameSaga() {
   yield takeEvery('SET_ROUTINE_NAME', postRoutine);
-  yield takeEvery('FETCH_ROUTINE_NAME', fetchRoutine)
+  yield takeEvery('FETCH_ROUTINE_NAMES', fetchRoutine)
+  yield takeEvery('RETRIEVE_SINGLE_ROUTINE', retrieveSingleRoutine)
 }
 
 function* postRoutine(action) {
@@ -22,14 +23,27 @@ function* postRoutine(action) {
   
   function* fetchRoutine(){
     try {
-      const response = yield axios.get('/routine/name')
+      const response = yield axios.get(`/routine/name`)
       
-      yield put ({type: 'INSTILL_ROUTINE_NAME', payload: response.data})
+      yield put ({type: 'INSTILL_ROUTINE_NAMES', payload: response.data})
     }
     catch(error){
       console.log('Error with getting routine name from DB', error)
     }
   }
+
+  function* retrieveSingleRoutine (action){
+
+    try {
+      const response = yield axios.get(`/routine/name/${action.payload}`)
+
+      yield put({ type: 'SET_SINGLE_NAME', payload: response.data })
+    }
+    catch (error) {
+      console.log('Error with getting routine name from DB', error)
+    }
+  }
+  
 
 
 

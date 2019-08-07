@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 
 class RoutineNamePage extends Component {
 
+  componentDidMount() {
+    this.props.dispatch({ type: 'FETCH_ROUTINE_NAMES' })
+  }
+
   state = {
     routineName: '',
     day: ''
@@ -18,7 +22,7 @@ class RoutineNamePage extends Component {
       day: ''
     })
 
-    this.props.history.push('/routine')
+
 
   }
 
@@ -31,9 +35,20 @@ class RoutineNamePage extends Component {
     })
   }
 
+  handleRoutine = (item) => {
+    console.log(item.id)
+
+    this.props.dispatch({ type: 'RETRIEVE_SINGLE_ROUTINE', payload: item.id });
+
+    this.props.history.push('/routine')
+
+
+  }
+
 
   render() {
-    
+    console.log('this.state', this.state);
+
     return (
       <>
         <h1>Build Routine Name and Day</h1>
@@ -51,15 +66,23 @@ class RoutineNamePage extends Component {
             <option value="saturday">Saturday</option>
             <option value="sunday">Sunday</option>
           </select>
-          <br />
           <button onClick={this.handleSubmit}>Submit</button>
-
         </form>
+       
+        {this.props.reduxStore.routineNames.map(item => (
+          <div key={item.id}>
+            <button onClick={() => this.handleRoutine(item)}>{item.routineName}</button>
+          </div>
+        ))}
       </>
     )
   }
 }
 
+const mapReduxStoreToProps = (reduxStore) => ({
+  reduxStore
+})
 
 
-export default connect()(RoutineNamePage);
+
+export default connect(mapReduxStoreToProps)(RoutineNamePage);

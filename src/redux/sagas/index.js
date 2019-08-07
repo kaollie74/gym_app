@@ -19,6 +19,5 @@ export default function* rootSaga() {
     userSaga(),
     RoutineNameSaga(),
     RoutineSaga(),
-   
   ]);
 }

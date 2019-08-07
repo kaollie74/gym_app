@@ -1,6 +1,6 @@
-const RoutineNameReducer = (state = {}, action) => {
+const RoutineSingleNameReducer = (state = {}, action) => {
   switch (action.type) {
-    case 'INSTILL_ROUTINE_NAME':
+    case 'SET_SINGLE_NAME':
       return action.payload;
     default:
       return state;
@@ -9,4 +9,4 @@ const RoutineNameReducer = (state = {}, action) => {
 
 // user will be on the redux state at:
 // state.user
-export default RoutineNameReducer;
+export default RoutineSingleNameReducer;
