@@ -5,6 +5,8 @@ import RoutineActivitiesList from '../RoutineActivitiesList/RoutineActivitiesLis
 
 class RoutinePage extends Component {
 
+  
+
   state = {
     routine_id: '',
     body_part: '',
@@ -18,7 +20,7 @@ class RoutinePage extends Component {
   handleSubmit = (event) => {
 
     event.preventDefault();
-    if (this.state.type !== '' && this.state.exercise_name !== '' && this.state.sets !== '' && this.state.reps !== '') {
+    if (this.state.body_part !== '' && this.state.exercise_name !== '' && this.state.sets !== '' && this.state.reps !== '') {
       // run dispatch 
       this.props.dispatch({ type: 'POST_ACTIVITY', payload: this.state })
 
@@ -74,7 +76,7 @@ class RoutinePage extends Component {
 
         {/* {JSON.stringify(this.props.reduxStore.routineSingle)} */}
         <h1>{this.props.reduxStore.routineSingle.routineName} - {this.props.reduxStore.routineSingle.day}</h1>
-        <RoutineActivitiesList/>
+        <RoutineActivitiesList state={this.state}/>
 
       </>
     )

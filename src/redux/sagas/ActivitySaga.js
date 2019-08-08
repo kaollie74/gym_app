@@ -5,6 +5,7 @@ import { put, takeEvery } from 'redux-saga/effects';
 function* ActivitySaga() {
   yield takeEvery('POST_ACTIVITY', postActivity);
   yield takeEvery('GET_ROUTINE_ACTIVITIES', getRoutineActivities)
+  yield takeEvery('REMOVE_ACTIVITY', removeActivity)
 }
 
 function* postActivity(action) {
@@ -33,6 +34,20 @@ function* getRoutineActivities(action) {
 
   }
 
+}
+
+function* removeActivity (action){
+  try{
+
+    console.log('In Remove Activity', action.payload)
+    
+    yield axios.delete(`/activity/delete/${action.payload}`)
+    //yield put({type: 'GET_ROUTINE_ACTIVITIES'})
+  }
+  catch(error){
+    console.log('Error with removing Activity from Activity table', error);
+    
+  }
 }
 
 

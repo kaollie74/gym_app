@@ -38,6 +38,10 @@ function* postRoutine(action) {
       const response = yield axios.get(`/routine/name/${action.payload}`)
 
       yield put({ type: 'SET_SINGLE_NAME', payload: response.data })
+
+      console.log(' this is in Retrieve single routine action.payload', action.payload);
+      
+      //yield put({ type: 'GET_ROUTINE_ACTIVITIES', payload: action.id })
     }
     catch (error) {
       console.log('Error with getting routine name from DB', error)
