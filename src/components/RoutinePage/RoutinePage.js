@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { thisExpression } from '@babel/types';
+import RoutineActivitiesList from '../RoutineActivitiesList/RoutineActivitiesList';
+
 
 class RoutinePage extends Component {
 
@@ -71,9 +72,10 @@ class RoutinePage extends Component {
 
         </form>
 
-        {JSON.stringify(this.props.reduxStore.routineSingle)}
+        {/* {JSON.stringify(this.props.reduxStore.routineSingle)} */}
         <h1>{this.props.reduxStore.routineSingle.routineName} - {this.props.reduxStore.routineSingle.day}</h1>
-          
+        <RoutineActivitiesList/>
+
       </>
     )
   }
