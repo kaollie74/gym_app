@@ -3,26 +3,66 @@ import { connect } from 'react-redux';
 
 class RoutineActivitiesList extends Component {
 
-  // componentDidMount() {
-  //   this.props.dispatch({ type: 'GET_ROUTINES_ACTIVITIES', payload: this.props.reduxStore.routineSingle })
+  // state = {
+  //   body_part: '',
+  //   comment: '',
+  //   completed: false,
+  //   exercise: '',
+  //   id: '',
+  //   reps: '',
+  //   routine_id: '',
+  //   sets: '',
   // }
-
-
-editActivity = (item) => {
-  console.log('In edit Activity', item);
-  // this.props.setState({
-
-  // })
   
-}
+  state = {
+    body_part: '',
+    comment: '',
+    completed: '',
+    exercise: '',
+    id: '',
+    reps: '',
+    routine_id: '',
+    sets: '',
+  }
 
-deleteActivity = (item) => {
-  console.log('in delete Activity', item.id);
-  this.props.dispatch({type: "REMOVE_ACTIVITY", payload: item.id})
+ 
+
+
+
+  editActivity = (item) => {
+    console.log('In edit Activity', item);
+    
+
+    let routinePass = {
+      body_part: item.body_part,
+      comment: item.comment,
+      completed: item.completed,
+      exercise: item.exercise,
+      id: item.id,
+      reps: item.reps,
+      routine_id: item.routine_id,
+      sets: item.sets,
+      edit: true,
+    }
+    
+    this.props.dispatch({type: 'EDIT_MODE', payload: routinePass})
+
+    this.props.whatever(item);
   
-}
+  }
 
-  render () {
+  deleteActivity = (item) => {
+
+    console.log('in delete Activity', item);
+    this.props.dispatch({ type: "REMOVE_ACTIVITY", payload: item })
+
+  }
+
+  render() {
+
+    // console.log('This is State in RoutineActivitiesList', this.state);
+    
+
     return (
       <table>
         <thead>
@@ -42,7 +82,7 @@ deleteActivity = (item) => {
               <td>{item.sets}</td>
               <td>{item.reps}</td>
               <td>{item.comment}</td>
-              <td><button onClick={() => this.editActivity (item)}>Edit</button></td>
+              <td><button onClick={() => this.editActivity(item)}>Edit</button></td>
               <td><button onClick={() => this.deleteActivity(item)}>Delete</button></td>
             </tr>
 

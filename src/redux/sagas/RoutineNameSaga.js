@@ -8,6 +8,7 @@ function* RoutineNameSaga() {
   yield takeEvery('RETRIEVE_SINGLE_ROUTINE', retrieveSingleRoutine)
 }
 
+// Post a new Routine name to the data base
 function* postRoutine(action) {
  
   try {
@@ -20,7 +21,7 @@ function* postRoutine(action) {
   }
 }
 
-  
+  // Fetch the all the Routine names and store it in a reducer to access.
   function* fetchRoutine(){
     try {
       const response = yield axios.get(`/routine/name`)
@@ -32,16 +33,22 @@ function* postRoutine(action) {
     }
   }
 
+  // This Generator function, when click on the DOM, will grab the specific
+  // routine by its id and place it in the RoutineSingleNameReducer
   function* retrieveSingleRoutine (action){
 
     try {
-      const response = yield axios.get(`/routine/name/${action.payload}`)
 
+      // AXIOS to get individual Routine name from routine table
+      // and set it into its own reducer
+      const response = yield axios.get(`/routine/name/${action.payload}`)
       yield put({ type: 'SET_SINGLE_NAME', payload: response.data })
 
       console.log(' this is in Retrieve single routine action.payload', action.payload);
       
-      //yield put({ type: 'GET_ROUTINE_ACTIVITIES', payload: action.id })
+      // Once the single routine is set, this will begin the process of retrieving
+      // all the activities associated with that routine name.
+      yield put({ type: 'GET_INITIAL_ACTIVITIES', payload: action.payload })
     }
     catch (error) {
       console.log('Error with getting routine name from DB', error)

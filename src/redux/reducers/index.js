@@ -5,7 +5,7 @@ import user from './userReducer';
 import routineNames from './RoutineNamesReducer';
 import routineSingle from './RoutineSingleName';
 import activities from './ActivitiesReducer';
-
+import editMode from './EditModeReducer';
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -18,7 +18,8 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   routineNames,
   routineSingle,
-  activities
+  activities,
+  editMode
 });
 
 export default rootReducer;

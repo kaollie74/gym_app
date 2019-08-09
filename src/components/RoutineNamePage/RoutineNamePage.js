@@ -8,23 +8,24 @@ class RoutineNamePage extends Component {
   }
 
   state = {
+   
     routineName: '',
     day: ''
   }
 
+  // Handles setting a new Routine name and running a dispatch to 
+  // post it in the DB
   handleSubmit = (event) => {
     event.preventDefault();
     // run dispatch 
     this.props.dispatch({ type: 'SET_ROUTINE_NAME', payload: this.state })
 
     this.setState({
+     
       routineName: '',
       day: ''
     })
-
-
-
-  }
+  } // end handleSubmit
 
 
 
@@ -35,8 +36,10 @@ class RoutineNamePage extends Component {
     })
   }
 
+  // retrieves single routine by its 'id' and runs a dispatch
+  // which will eventually place it into its own reducer.
   handleRoutine = (item) => {
-    console.log(item.id)
+    console.log('IN handle Routine',item)
 
     this.props.dispatch({ type: 'RETRIEVE_SINGLE_ROUTINE', payload: item.id });
 

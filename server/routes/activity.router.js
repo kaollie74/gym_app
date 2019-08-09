@@ -3,7 +3,8 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 router.get('/:id', (req, res) => {
-  console.log('IN ACTIVITY ROUTER GET', req.params.id);
+  console.log('REQ.BODY', req.body)
+  console.log('IN ACTIVITY ROUTER GET/:id', req.params.id);
   const sqlText = `SELECT * FROM "activity" WHERE "routine_id" = $1;`;
   value = [req.params.id];
   pool.query(sqlText, value)
@@ -19,6 +20,7 @@ router.get('/:id', (req, res) => {
 
 })
 
+// POST an activity 
 router.post('/', (req, res) => {
 
   //console.log('req.user.id', req.user.id);
@@ -52,7 +54,7 @@ router.post('/', (req, res) => {
 router.delete('/delete/:id', (req,res) => {
 
   console.log('HITTING THE DELETE ROUTE', req.params.id)
-  
+
   sqlText = `DELETE FROM "activity" WHERE "id" = $1`
   value = [req.params.id]
   pool.query(sqlText, value)

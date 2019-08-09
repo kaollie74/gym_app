@@ -5,17 +5,54 @@ import RoutineActivitiesList from '../RoutineActivitiesList/RoutineActivitiesLis
 
 class RoutinePage extends Component {
 
-  
+
 
   state = {
-    routine_id: '',
-    body_part: '',
-    exercise: '',
-    sets: '',
-    reps: '',
-    comments: '',
+    routine_id: this.props.reduxStore.editMode.routine_id,
+    body_part: this.props.reduxStore.editMode.body_part,
+    exercise: this.props.reduxStore.editMode.exercise,
+    sets: this.props.reduxStore.editMode.sets,
+    reps: this.props.reduxStore.editMode.reps,
+    comments: this.props.reduxStore.editMode.comments,
+    edit: false
   }
 
+  // editMode = () => {
+  //   if (this.state === false) {
+  //     this.setState({
+  //       ...this.state,
+  //       edit: true
+  //     })
+  //   }
+  // }
+
+  whatever = (item) => {
+    console.log('In Whatever function', item)
+
+     this.setState({
+        routine_id: item.routine_id,
+        body_part: item.body_part,
+        exercise: item.exercise,
+        sets: item.sets,
+        reps: item.sets,
+        comments: item.comment,
+       
+      })
+  }
+
+  checkEdit = () => {
+   
+    if (this.props.reduxStore.editMode.edit === true) {
+     
+      return (<button onClick={this.updateSubmit}>update</button>)
+    } else {
+
+      return (
+        <button onClick={(item) => this.handleSubmit(item)}>Submit</button>
+      )
+
+    }
+  }
 
   handleSubmit = (event) => {
 
@@ -48,7 +85,7 @@ class RoutinePage extends Component {
 
 
   render() {
-    console.log('State Is', this.state);
+    console.log('this.state', this.state);
 
     return (
       <>
@@ -70,16 +107,18 @@ class RoutinePage extends Component {
           <input type='number' placeholder='Sets' value={this.state.sets} onChange={(event) => this.handleChange(event, 'sets')} />
           <input type='number' placeholder='Reps' value={this.state.reps} onChange={(event) => this.handleChange(event, 'reps')} />
           <input type='text' placeholder='Comments' value={this.state.comments} onChange={(event) => this.handleChange(event, 'comments')} />
-          <button onClick={this.handleSubmit}>Submit</button>
+          {this.checkEdit()}
+          {/* <button onClick={(item)=>this.handleSubmit(item)}>Submit</button> */}
+
 
         </form>
 
-        {/* {JSON.stringify(this.props.reduxStore.routineSingle)} */}
         <h1>{this.props.reduxStore.routineSingle.routineName} - {this.props.reduxStore.routineSingle.day}</h1>
-        <RoutineActivitiesList state={this.state}/>
+        <RoutineActivitiesList whatever = {this.whatever} />
 
       </>
     )
+
   }
 }
 
