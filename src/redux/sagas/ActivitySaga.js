@@ -8,6 +8,7 @@ function* ActivitySaga() {
   yield takeEvery('GET_INITIAL_ACTIVITIES', getInitialRoutineActivities )
   yield takeEvery('POST_ACTIVITY', postActivity);
   yield takeEvery('REMOVE_ACTIVITY', removeActivity);
+  yield takeEvery('EDIT_ACTIVITY', editActivity)
 }
 
 // This function will POST an activity to the activity table
@@ -70,6 +71,15 @@ function* removeActivity (action){
   catch(error){
     console.log('Error with removing Activity from Activity table', error);
     
+  }
+}
+// Finish me <--------------------------------------------------------------------------------------
+function* editActivity (action){
+  try{
+    yield axios.put(``)
+  }
+  catch(error){
+
   }
 }
 

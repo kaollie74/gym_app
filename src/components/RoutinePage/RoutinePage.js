@@ -5,8 +5,6 @@ import RoutineActivitiesList from '../RoutineActivitiesList/RoutineActivitiesLis
 
 class RoutinePage extends Component {
 
-
-
   state = {
     routine_id: this.props.reduxStore.editMode.routine_id,
     body_part: this.props.reduxStore.editMode.body_part,
@@ -17,41 +15,68 @@ class RoutinePage extends Component {
     edit: false
   }
 
-  // editMode = () => {
-  //   if (this.state === false) {
-  //     this.setState({
-  //       ...this.state,
-  //       edit: true
-  //     })
-  //   }
-  // }
-
-  whatever = (item) => {
+ // Function will update state based on the row of values that exist
+ // in RoutineActivitiesList component
+  updateState = (item) => {
     console.log('In Whatever function', item)
 
-     this.setState({
-        routine_id: item.routine_id,
-        body_part: item.body_part,
-        exercise: item.exercise,
-        sets: item.sets,
-        reps: item.sets,
-        comments: item.comment,
-       
-      })
+    this.setState({
+      routine_id: item.routine_id,
+      body_part: item.body_part,
+      exercise: item.exercise,
+      sets: item.sets,
+      reps: item.sets,
+      comments: item.comment,
+
+    })
   }
 
+
+  // Function will conditional render buttons depending on whether the
+  // edit is set to 'true' or 'false' in the editModeReducer.
   checkEdit = () => {
-   
     if (this.props.reduxStore.editMode.edit === true) {
-     
-      return (<button onClick={this.updateSubmit}>update</button>)
+
+      return (
+      <>  
+      <button onClick={(item) => this.updateSubmit(item)}>update</button>
+      <button onClick={this.handleCancel}>Cancel</button>
+      </>
+        )
+
     } else {
 
       return (
-        <button onClick={(item) => this.handleSubmit(item)}>Submit</button>
+       
+          <button onClick={(item) => this.handleSubmit(item)}>Submit</button>     
       )
+    } // end else
+  }// end checkEdit
 
+  updateSubmit = () => {
+    console.log('In updateSubmit', this.state)
+    this.props.dispatch({type: "EDIT_ACTIVITY", payload: this.state})
+
+  }
+
+  // Function will set the pass an object through a dispatch to 
+  // the editModeReducer which will create a toggle effect for the
+  // buttons
+  handleCancel = () => {
+    let routinePass = {
+      body_part:'',
+      comment:'',
+      completed:'',
+      exercise:'',
+      id: '',
+      reps:'',
+      routine_id: '',
+      sets: '',
+      edit: false,
     }
+
+    this.props.dispatch({ type: 'EDIT_MODE', payload: routinePass })
+   
   }
 
   handleSubmit = (event) => {
@@ -114,7 +139,7 @@ class RoutinePage extends Component {
         </form>
 
         <h1>{this.props.reduxStore.routineSingle.routineName} - {this.props.reduxStore.routineSingle.day}</h1>
-        <RoutineActivitiesList whatever = {this.whatever} />
+        <RoutineActivitiesList updateState={this.updateState} />
 
       </>
     )

@@ -2,13 +2,14 @@
 
 const EditModeReducer = (state = {
   body_part: '',
-  comment: '',
+  comments: '',
   completed: '',
   exercise: '',
   id: '',
   reps: '',
   routine_id: '',
-  sets: '',}, action) => {
+  sets: '',
+}, action) => {
   switch (action.type) {
     case 'EDIT_MODE':
       return action.payload;

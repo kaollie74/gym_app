@@ -8,7 +8,6 @@ class RoutineNamePage extends Component {
   }
 
   state = {
-   
     routineName: '',
     day: ''
   }
@@ -21,7 +20,6 @@ class RoutineNamePage extends Component {
     this.props.dispatch({ type: 'SET_ROUTINE_NAME', payload: this.state })
 
     this.setState({
-     
       routineName: '',
       day: ''
     })
@@ -57,17 +55,17 @@ class RoutineNamePage extends Component {
         <h1>Build Routine Name and Day</h1>
 
         <form>
-          <input type='text' placeholder='Routine Name' onChange={(event) => this.handleChange(event, 'routineName')} />
+          <input type='text' placeholder='Routine Name' value={this.state.routineName} onChange={(event) => this.handleChange(event, 'routineName')} />
 
-          <select onChange={(event) => this.handleChange(event, 'day')} >
+          <select value={this.state.day} onChange={(event) => this.handleChange(event, 'day')} >
             <option value='default'>Select Day</option>
-            <option value="monday">Monday</option>
-            <option value="tuesday">Tuesday</option>
-            <option value="wednesday">Wednesday</option>
-            <option value="thursday">Thursday</option>
-            <option value="friday">Friday</option>
-            <option value="saturday">Saturday</option>
-            <option value="sunday">Sunday</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+            <option value="Sunday">Sunday</option>
           </select>
           <button onClick={this.handleSubmit}>Submit</button>
         </form>

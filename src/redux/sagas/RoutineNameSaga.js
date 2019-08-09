@@ -13,7 +13,7 @@ function* postRoutine(action) {
  
   try {
     axios.post('/routine/name', action.payload)
-    yield put ({type: 'FETCH_ROUTINE_NAME'})
+    yield put ({type: 'FETCH_ROUTINE_NAMES'})
   }
   catch (error){
     console.log('Error with posting to dataBase');

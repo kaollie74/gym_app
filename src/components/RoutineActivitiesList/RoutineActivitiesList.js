@@ -3,17 +3,6 @@ import { connect } from 'react-redux';
 
 class RoutineActivitiesList extends Component {
 
-  // state = {
-  //   body_part: '',
-  //   comment: '',
-  //   completed: false,
-  //   exercise: '',
-  //   id: '',
-  //   reps: '',
-  //   routine_id: '',
-  //   sets: '',
-  // }
-  
   state = {
     body_part: '',
     comment: '',
@@ -25,13 +14,9 @@ class RoutineActivitiesList extends Component {
     sets: '',
   }
 
- 
-
-
 
   editActivity = (item) => {
     console.log('In edit Activity', item);
-    
 
     let routinePass = {
       body_part: item.body_part,
@@ -47,7 +32,7 @@ class RoutineActivitiesList extends Component {
     
     this.props.dispatch({type: 'EDIT_MODE', payload: routinePass})
 
-    this.props.whatever(item);
+    this.props.updateState(item);
   
   }
 
