@@ -76,10 +76,12 @@ function* removeActivity (action){
 // Finish me <--------------------------------------------------------------------------------------
 function* editActivity (action){
   try{
-    yield axios.put(``)
+    yield axios.put(`/activity/update/${action.payload.id}`, action.payload);
+    yield put ({type: 'GET_ROUTINE_ACTIVITIES', payload: action.payload})
   }
   catch(error){
-
+    console.log('Error with updating the Activity in the DB', error);
+    
   }
 }
 

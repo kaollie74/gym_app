@@ -67,5 +67,19 @@ router.delete('/delete/:id', (req,res) => {
   })
 })
 
+router.put('/update/:id', (req,res)=> {
+  console.log('In router.put', req.body)
+  const sqlText = `UPDATE "activity" SET "exercise"=$1, "reps"=$2, "sets"=$3, "body_part"=$4, "comment"=$5 WHERE "id"=$6`
+  values = [req.body.exercise, req.body.reps, req.body.sets, req.body.body_part, req.body.comments, req.body.id ]
+  pool.query(sqlText, values)
+  .then((response)=> {
+    res.sendStatus(201)
+  })
+  .catch((error)=> {
+    console.log('In router.put, error with posting to the database', error);
+    res.sendStatus(500);
+  })
+})
+
 
 module.exports = router;
