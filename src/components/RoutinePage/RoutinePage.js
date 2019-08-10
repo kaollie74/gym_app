@@ -28,7 +28,7 @@ class RoutinePage extends Component {
       body_part: item.body_part,
       exercise: item.exercise,
       sets: item.sets,
-      reps: item.sets,
+      reps: item.reps,
       comments: item.comment,
 
     })
@@ -56,7 +56,21 @@ class RoutinePage extends Component {
   updateSubmit = () => {
     console.log('In updateSubmit', this.state)
     this.props.dispatch({type: "EDIT_ACTIVITY", payload: this.state})
+    let routinePass ={
+      body_part:'',
+      comment:'',
+      completed:'',
+      exercise:'',
+      id: '',
+      reps:'',
+      routine_id: '',
+      sets: '',
+      edit: false,
+    }
+    this.props.dispatch({type:"EDIT_MODE", payload: routinePass})
+    
     this.setState({
+      id: '',
       routine_id: '',
       body_part: '',
       exercise: '',
@@ -79,9 +93,10 @@ class RoutinePage extends Component {
       completed:'',
       exercise:'',
       id: '',
+      sets: '',
       reps:'',
       routine_id: '',
-      sets: '',
+    
       edit: false,
     }
 
