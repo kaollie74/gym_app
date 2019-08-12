@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import './RoutineNamePage.css';
 
 class RoutineNamePage extends Component {
 

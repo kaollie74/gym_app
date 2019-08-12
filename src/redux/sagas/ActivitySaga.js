@@ -73,7 +73,7 @@ function* removeActivity (action){
     
   }
 }
-// Finish me <--------------------------------------------------------------------------------------
+// This generator function runs an 'Axios.put'. Afterwards, it runs a
 function* editActivity (action){
   try{
     yield axios.put(`/activity/update/${action.payload.id}`, action.payload);

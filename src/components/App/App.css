@@ -1,6 +1,11 @@
+.backgroundColor {
+    background-color: yellow;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
+    background-color: #4b3c8a;
 }
 
 .alert {

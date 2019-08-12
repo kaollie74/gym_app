@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import '../App/App.css'
+import './HomePage.css'
 
 //import Material UI
 import Card from '@material-ui/core/Card';

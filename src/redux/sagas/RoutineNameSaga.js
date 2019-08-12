@@ -6,6 +6,7 @@ function* RoutineNameSaga() {
   yield takeEvery('SET_ROUTINE_NAME', postRoutine);
   yield takeEvery('FETCH_ROUTINE_NAMES', fetchRoutine)
   yield takeEvery('RETRIEVE_SINGLE_ROUTINE', retrieveSingleRoutine)
+  yield takeEvery('UPDATE_ROUTINE_CHECKBOX', updateRoutineCheckbox)
 }
 
 // Post a new Routine name to the data base
@@ -55,6 +56,16 @@ function* postRoutine(action) {
     }
   }
   
+  function* updateRoutineCheckbox (action) {
+    try {
+      yield axios.put(`/routine/update/${action.payload.id}`, action.payload);
+      yield put({ type: 'FETCH_ROUTINE_NAMES'})
+    }
+    catch (error) {
+      console.log('Error with updating the Activity in the DB', error);
+
+    }
+  }
 
 
 

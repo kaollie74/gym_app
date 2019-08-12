@@ -51,7 +51,7 @@ class RoutineActivitiesList extends Component {
 
     return (
       <table>
-        <thead>
+        <tr>
           <th>Body Part</th>
           <th>Exercise</th>
           <th>Sets</th>
@@ -59,7 +59,7 @@ class RoutineActivitiesList extends Component {
           <th>Comments</th>
           <th>Edit</th>
           <th>Remove</th>
-        </thead>
+        </tr>
         <tbody>
           {this.props.reduxStore.activities.map(item => (
             <tr key={item.id}>

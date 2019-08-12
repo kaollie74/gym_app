@@ -54,7 +54,7 @@ class RoutinePage extends Component {
 
   // function will fire after the user makes changes to their edit. 
   updateSubmit = () => {
-    console.log('In updateSubmit', this.state)
+    //console.log('In updateSubmit', this.state)
     this.props.dispatch({type: "EDIT_ACTIVITY", payload: this.state})
     let routinePass ={
       body_part:'',
@@ -101,6 +101,17 @@ class RoutinePage extends Component {
     }
 
     this.props.dispatch({ type: 'EDIT_MODE', payload: routinePass })
+
+    this.setState({
+      id: '',
+      routine_id: '',
+      body_part: '',
+      exercise: '',
+      sets: '',
+      reps: '',
+      comments: '',
+      edit: false
+    })
    
   } // end handleCancel
 
