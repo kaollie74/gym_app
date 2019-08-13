@@ -10,7 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { blue } from '@material-ui/core/colors';
+
 
 
 // const CustomTableCell = withStyles(theme => ({
@@ -57,7 +57,6 @@ const styles = theme => ({
 
 class WeeklyPage extends Component {
 
-
   state = {
     completed: false,
   }
@@ -86,7 +85,7 @@ class WeeklyPage extends Component {
 
   handleRoutine = (item) => {
     console.log('In handleRoutine', item);
-    
+
   }
 
   render() {
@@ -125,7 +124,7 @@ class WeeklyPage extends Component {
                       variant="contained"
                       color="primary"
                       className={classes.button}
-                      onClick = { () => this.handleRoutine(item)}
+                      onClick={() => this.handleRoutine(item)}
                     >
                       See Routine
                     </Button>

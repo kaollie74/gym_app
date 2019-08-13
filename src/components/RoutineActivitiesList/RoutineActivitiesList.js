@@ -1,6 +1,48 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+//Material UI
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+
+const styles = theme => ({
+  root: {
+    width: '80%',
+    margin: 'auto',
+    marginTop: theme.spacing.unit * 20,
+    overflowX: 'auto',
+
+  },
+  name: {
+    marginLeft: 0,
+  },
+  table: {
+    minWidth: 400,
+  },
+  tableHead: {
+    backgroundColor: 'black',
+    color: 'white',
+    fontSize: 24,
+    marginRight: 0,
+    paddingRight: 100,
+  },
+  row: {
+    maxWidth: 300,
+    margin: 'auto',
+    fontSize: 18,
+
+  },
+  button: {
+    padding: 'auto',
+  }
+});
+
 class RoutineActivitiesList extends Component {
 
   state = {
@@ -29,52 +71,68 @@ class RoutineActivitiesList extends Component {
       sets: item.sets,
       edit: true,
     }
-    
-    this.props.dispatch({type: 'EDIT_MODE', payload: routinePass})
+
+    this.props.dispatch({ type: 'EDIT_MODE', payload: routinePass })
 
     this.props.updateState(item);
-    
-  
   }
 
   deleteActivity = (item) => {
 
-    console.log('in delete Activity', item);
     this.props.dispatch({ type: "REMOVE_ACTIVITY", payload: item })
-
-  }
+  } // end deleteActivity
 
   render() {
 
-    // console.log('This is State in RoutineActivitiesList', this.state);
-    
-
+    const { classes } = this.props;
     return (
-      <table>
-        <tr>
-          <th>Body Part</th>
-          <th>Exercise</th>
-          <th>Sets</th>
-          <th>Reps</th>
-          <th>Comments</th>
-          <th>Edit</th>
-          <th>Remove</th>
-        </tr>
-        <tbody>
-          {this.props.reduxStore.activities.map(item => (
-            <tr key={item.id}>
-              <td>{item.body_part}</td>
-              <td>{item.exercise}</td>
-              <td>{item.sets}</td>
-              <td>{item.reps}</td>
-              <td>{item.comment}</td>
-              <td><button onClick={() => this.editActivity(item)}>Edit</button></td>
-              <td><button onClick={() => this.deleteActivity(item)}>Delete</button></td>
+      <Paper className={classes.root}>
+        <Table>
+          <TableHead className={classes.tableHead}>
+            <tr>
+              <th>Body Part</th>
+              <th>Exercise</th>
+              <th>Sets</th>
+              <th>Reps</th>
+              <th>Comments</th>
+              <th>Edit</th>
+              <th>Remove</th>
             </tr>
+          </TableHead>
+          <TableBody>
+            {this.props.reduxStore.activities.map(item => (
+              <tr key={item.id}>
+                <TableCell>{item.body_part}</TableCell>
+                <TableCell>{item.exercise}</TableCell>
+                <TableCell>{item.sets}</TableCell>
+                <TableCell>{item.reps}</TableCell>
+                <TableCell>{item.comment}</TableCell>
+                <TableCell>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                    onClick={() => this.editActivity(item)}
+                  >
+                    Edit
+                    </Button>
+                </TableCell>
+                <TableCell>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    className={classes.button}
+                    onClick={() => this.deleteActivity(item)}
+                  >
+                    Delete
+                    </Button>
+                </TableCell>
+              </tr>
 
-          ))}
-        </tbody>
-      </table>
+            ))}
+          </TableBody>
+        </Table>
+      </Paper>
     )
   }
 
@@ -89,4 +147,4 @@ const mapReduxStoreToProps = (reduxStore) => ({
 
 
 
-export default connect(mapReduxStoreToProps)(RoutineActivitiesList);
+export default withStyles(styles)(connect(mapReduxStoreToProps)(RoutineActivitiesList));
