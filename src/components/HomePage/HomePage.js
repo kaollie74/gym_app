@@ -7,8 +7,9 @@ import './HomePage.css'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
+import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
-import { createMuiTheme, MuiThemeProvider, withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 
@@ -23,60 +24,61 @@ const styles = theme => ({
   card: {
     display: 'inline-block',
     width: 400,
-    margin: 20,
-    marginLeft: 300,
-    height: 250
+    margin: 15,
+    marginLeft: 425,
+    height: 300,
+    backgroundColor: 'gray',
   },
   enter: {
-    marginTop: 140,
+    marginTop: 20,
     marginLeft: 140
   },
   title: {
     fontSize: 16,
     textAlign: 'center'
   },
- text: {
-    marginLeft: 30
+  text: {
+    textAlign: 'center',
   },
   cardContent: {
     fontSize: 14
   },
-  
+  gridList: {
+    width: 300,
+    height: 350
+  },
+  media: {
+    height: 160,
+  }
+
 })
 
 
+
+
 class HomePage extends Component {
-
-  // BuildARoutineName = () => {
-  //   this.props.history.push('/name')
-  // }
-
-  // weeklyRoutine = () => {
-  //   this.props.history.push('/weekly')
-
-  // }
-
-  // routineDatabase = () => {
-  //   this.props.history.push('/database')
-  // }
 
   render() {
     const { classes } = this.props;
     return (
       <>
-        <MuiThemeProvider>
           <div>
-            <Typography className={classes.text} variant="h1" component="h2"  gutterBottom>
-              Welcome, {this.props.user.username}!
-          </Typography>
-            <p>Your ID is: {this.props.user.id}</p>
+            <Typography className={classes.text} variant="h1" component="h2" gutterBottom>
+              Welcome, GymFit {this.props.user.username}!
+            </Typography>
+        
 
           </div>
-          <Card className={classes.card}>
+          <Card className={classes.card} >
             <CardContent className={classes.cardContent} >
               <Typography className={classes.text} variant="h4" component="h2">
                 Build Your Routine
               </Typography>
+            <CardMedia
+              className={classes.media}
+              image="/images/weights.jpg"
+              title="Weights"
+            />
               <Button
                 component={Link}
                 to='/name'
@@ -86,6 +88,7 @@ class HomePage extends Component {
                 variant="contained">
                 Enter
             </Button>
+           
             </CardContent>
           </Card>
           <br />
@@ -94,7 +97,7 @@ class HomePage extends Component {
               <Typography className={classes.text} variant="h4" component="h2">
                 Weekly Routine
               </Typography>
-              <Button 
+              <Button
                 component={Link}
                 to='/weekly'
                 color="primary"
@@ -107,29 +110,29 @@ class HomePage extends Component {
           </Card>
           <br />
           <Card className={classes.card}>
-            
-            <Typography 
-            style={{marginTop: 20, marginLeft: 60}} 
-            variant="h4" 
-            component="h2">
-                Routine Database
+
+            <Typography
+              style={{ marginTop: 20, marginLeft: 60 }}
+              variant="h4"
+              component="h2">
+              Routine Database
             </Typography>
             <Button style={{ marginLeft: 160 }}
-                component={Link}
-                to='/database'
-                className={classes.enter}
-                color="primary"
-                onClick={this.routineDatabase}
-                variant="contained">
-                Enter
+              component={Link}
+              to='/database'
+              className={classes.enter}
+              color="primary"
+              onClick={this.routineDatabase}
+              variant="contained">
+              Enter
             </Button>
-            
+
           </Card>
 
           <div>
             <LogOutButton className="log-in" />
           </div>
-        </MuiThemeProvider>
+    
       </>
 
     )

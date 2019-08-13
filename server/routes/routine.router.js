@@ -47,7 +47,7 @@ router.put('/update/:id', (req,res)=> {
 // GET all "routine_names" and "days" from "routine" table
 router.get('/name', (req,res)=> {
   console.log(req.body.id);
-  const sqlText = `SELECT * FROM "routine";`;
+  const sqlText = `SELECT * FROM "routine" ORDER BY "id";`;
   
   pool.query(sqlText)
   .then((response)=> {

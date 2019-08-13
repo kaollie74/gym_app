@@ -1,6 +1,9 @@
 .backgroundColor {
     background-color: yellow;
+    text-decoration-line: 'line-through';
 }
+
+
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -8,13 +11,25 @@ body {
     background-color: #4b3c8a;
 }
 
+.buildRoutineForm {
+    width: 25%;
+    height: 60px;
+
+}
+
 .alert {
     background-color: #ff4545;
     margin: 50px;
 }
 
+.loginForm {
+    width: 25%;
+    height: 200px;
+    background-color: 'green';
+}
+
 form {
-    background-color: #dbd5d5;
+    background-color: #777777;
     width: 50%;
     height: 250px;
     margin: 20px auto;
@@ -61,5 +76,10 @@ input {
 .routineBtns {
     margin-left: 400px;
     
+}
+.routineTitle {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 50px;
 }
 

@@ -1,5 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import CardMedia from '@material-ui/core/CardMedia';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = theme => ({
+  card: {
+    display: 'inline-block',
+    width: 600,
+    height: 320,
+    marginLeft: 300,
+    marginTop: 20
+  },
+  media: {
+    height: 360,
+  },
+})
 
 class LoginPage extends Component {
   state = {
@@ -30,6 +48,8 @@ class LoginPage extends Component {
   }
 
   render() {
+    const { classes } = this.props;
+
     return (
       <div>
         {this.props.errors.loginMessage && (
@@ -40,7 +60,17 @@ class LoginPage extends Component {
             {this.props.errors.loginMessage}
           </h2>
         )}
-        <form onSubmit={this.login}>
+
+        <Card className={classes.card}>
+            <CardMedia
+              className={classes.media}
+              image="/images/weights.jpg"
+              title="Weights"
+              width= '200px'
+              height= '100px'
+            />
+        </Card>
+        <form className="loginForm"onSubmit={this.login}>
           <h1>Login</h1>
           <div>
             <label htmlFor="username">
@@ -77,7 +107,7 @@ class LoginPage extends Component {
           <button
             type="button"
             className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
+            onClick={() => { this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}
           >
             Register
           </button>
@@ -94,4 +124,4 @@ const mapStateToProps = state => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps)(LoginPage);
+export default withStyles(styles)(connect(mapStateToProps)(LoginPage));

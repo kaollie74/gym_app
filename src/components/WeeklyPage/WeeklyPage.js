@@ -1,10 +1,62 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import '../App/App.css'
+//import '../App/App.css'
 import Checkbox from '@material-ui/core/Checkbox';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import { blue } from '@material-ui/core/colors';
 
+
+// const CustomTableCell = withStyles(theme => ({
+//   head: {
+//     backgroundColor: theme.palette.common.black,
+//     color: theme.palette.common.white,
+//   },
+//   body: {
+//     fontSize: 14,
+//   },
+// }))(TableCell);
+
+const styles = theme => ({
+  root: {
+    width: '80%',
+    margin: 'auto',
+    marginTop: theme.spacing.unit * 20,
+    overflowX: 'auto',
+
+  },
+  name: {
+    marginLeft: 0,
+  },
+  table: {
+    minWidth: 400,
+  },
+  tableHead: {
+    backgroundColor: 'black',
+    color: 'white',
+    fontSize: 24,
+    marginRight: 0,
+    paddingRight: 100,
+  },
+  row: {
+    maxWidth: 300,
+    margin: 'auto',
+    fontSize: 18,
+
+  },
+  button: {
+    padding: 'auto',
+  }
+});
 
 class WeeklyPage extends Component {
+
 
   state = {
     completed: false,
@@ -14,25 +66,13 @@ class WeeklyPage extends Component {
     this.props.dispatch({ type: 'FETCH_ROUTINE_NAMES' })
   }
 
-  // createCheckbox = (option) => {
-  //   <Checkbox 
-  //   label = {option}
-  //   isSelected={this.state.checkbox[option]}
-  //   onCheckboxChange={this.handleCheckboxChange}
-  //   key={option}/>
-  // }
-
   handleCheck = (event, item) => {
 
-    if(item.completed === false){
+    if (item.completed === false) {
       item.completed = true;
-    } else{
+    } else {
       item.completed = false
-    }
-
-    // this.setState({
-    //   completed: !this.state.completed
-    // })
+    }// end conditional
 
     let checked = {
       completed: item.completed,
@@ -41,39 +81,57 @@ class WeeklyPage extends Component {
     }
     console.log('Checked', checked)
     //console.log('this is state', this.state)
-   
-    //this.props.dispatch({type: 'UPDATE_ROUTINE_CHECKBOX', payload: checked})
-    
-  }
-
+    this.props.dispatch({ type: 'UPDATE_ROUTINE_CHECKBOX', payload: checked })
+  }// end handleCheck
 
   render() {
-    //console.log('This.state', this.state);
-    
-      return (
-        <>
-          <h3></h3>
-          <table>
-            <tr>
+    const { classes } = this.props;
+    return (
+      <>
+        <Paper className={classes.root}>
+          <Table className={classes.table}>
+            <TableHead className={classes.tableHead}>
+              <th>&nbsp;</th>
               <th>DAY</th>
               <th>Routine Name</th>
-              <th>Completed</th>
               <th>See Routine</th>
-            </tr>
+            </TableHead>
 
-            <tbody>
+            <TableBody className={classes.row}>
               {this.props.reduxStore.routineNames.map(item => (
-                <tr key={item.id}>
-                  <td>{item.day}</td>
-                  <td>{item.routineName}</td>
-                  <input type="checkbox" value={this.state.completed} onChange= {(event) => this.handleCheck(event, item)} />
-                  <td><button>See Routine</button></td>
-                </tr>
+                <TableRow
+                  key={item.id}
+                  className={item.completed ? 'backgroundColor' : ''}
+                >
+                  <Checkbox
+                    type="checkbox"
+                    value={this.state.completed}
+                    onChange={(event) => this.handleCheck(event, item)}
+                  />
+                  <TableCell>{
+                    item.day}
+                  </TableCell>
+                  <TableCell className={classes.name}>
+                    {item.routineName}
+                  </TableCell>
+                  <TableCell>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      className={classes.button}
+                    >
+                      See Routine
+                    </Button>
+                  </TableCell>
+                </TableRow>
+
               ))}
-            </tbody>
-          </table>
-        </>
-      )
+            </TableBody>
+          </Table>
+        </Paper>
+      </>
+    )
+
   }
 } // end WeeklyPage
 
@@ -83,5 +141,5 @@ const mapReduxStoreToProps = (reduxStore) => ({
   reduxStore
 })
 
-export default connect(mapReduxStoreToProps)(WeeklyPage);
+export default withStyles(styles)(connect(mapReduxStoreToProps)(WeeklyPage));
 
