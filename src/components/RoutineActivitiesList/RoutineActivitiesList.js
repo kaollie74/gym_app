@@ -10,6 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
   root: {
@@ -96,7 +97,7 @@ class RoutineActivitiesList extends Component {
     }
     console.log('newObject', deleteRoutine);
 
-    this.props.dispatch({type: 'DELETE_ROUTINE', payload: deleteRoutine})
+    this.props.dispatch({ type: 'DELETE_ROUTINE', payload: deleteRoutine })
   }// end handleRoutineDelete
 
   render() {
@@ -107,7 +108,7 @@ class RoutineActivitiesList extends Component {
         <Paper className={classes.root}>
           <Table>
             <TableHead className={classes.tableHead}>
-              <tr>
+              <TableRow>
                 <th>Body Part</th>
                 <th>Exercise</th>
                 <th>Sets</th>
@@ -115,7 +116,7 @@ class RoutineActivitiesList extends Component {
                 <th>Comments</th>
                 <th>Edit</th>
                 <th>Remove</th>
-              </tr>
+              </TableRow>
             </TableHead>
             <TableBody>
               {this.props.reduxStore.activities.map(item => (
@@ -153,10 +154,12 @@ class RoutineActivitiesList extends Component {
         </Paper>
 
         <Button
+          component={Link}
+          to='/name'
           variant="contained"
           color="secondary"
           className={classes.deleteButton}
-          onClick = {this.handleRoutineDelete}
+          onClick={this.handleRoutineDelete}
         >
           Delete Routine
         </Button>

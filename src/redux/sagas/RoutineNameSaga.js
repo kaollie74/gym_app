@@ -13,7 +13,7 @@ function* RoutineNameSaga() {
 function* postRoutine(action) {
  
   try {
-    axios.post('/routine/name', action.payload)
+    yield axios.post('/routine/name', action.payload)
     yield put ({type: 'FETCH_ROUTINE_NAMES'})
   }
   catch (error){
@@ -27,6 +27,8 @@ function* postRoutine(action) {
     try {
       const response = yield axios.get(`/routine/name`)
       
+      // this will take the payload from the database and place it in 
+      // RoutineNameReducer
       yield put ({type: 'INSTILL_ROUTINE_NAMES', payload: response.data})
     }
     catch(error){

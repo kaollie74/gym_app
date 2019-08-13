@@ -10,6 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 
 
@@ -85,7 +86,7 @@ class WeeklyPage extends Component {
 
   handleRoutine = (item) => {
     console.log('In handleRoutine', item);
-
+    this.props.dispatch({ type: 'RETRIEVE_SINGLE_ROUTINE', payload: item.id });
   }
 
   render() {
@@ -121,6 +122,8 @@ class WeeklyPage extends Component {
                   </TableCell>
                   <TableCell>
                     <Button
+                    component={Link}
+                    to='/routine'
                       variant="contained"
                       color="primary"
                       className={classes.button}

@@ -4,6 +4,8 @@ import RoutineActivitiesList from '../RoutineActivitiesList/RoutineActivitiesLis
 
 
 class RoutinePage extends Component {
+  
+
 
   state = {
     routine_id: this.props.reduxStore.editMode.routine_id,
@@ -147,7 +149,7 @@ class RoutinePage extends Component {
 
   render() {
     console.log('this.state', this.state);
-
+      
     return (
       <>
         <form>

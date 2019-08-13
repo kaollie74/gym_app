@@ -79,7 +79,7 @@ class RoutineNamePage extends Component {
 
     this.props.dispatch({ type: 'RETRIEVE_SINGLE_ROUTINE', payload: item.id });
 
-    this.props.history.push('/routine')
+    this.props.history.push(`/routine`)
 
 
   }
