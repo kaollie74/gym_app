@@ -51,6 +51,32 @@ class RoutineNamePage extends Component {
     edit: false
   }
 
+  checkEdit = () => {
+    if (this.state.edit === false) {
+      return (
+        <>
+          <button onClick={(item) => this.handleSubmit(item)}>Submit</button>
+        </>
+      )// end return
+    } else {
+      return (
+        <>
+          <button onClick={(item) => this.updateSubmit(item)}>update</button>
+          <button onClick={this.handleCancel}>Cancel</button>
+        </>
+      )// end return 
+    } // end else
+  }// end checkEdit
+
+
+  handleCancel = () => {
+    this.setState({
+      routineName: '',
+      day: '',
+      edit: false
+    })
+  }
+
   // Handles setting a new Routine name and running a dispatch to 
   // post it in the DB
   handleSubmit = (event) => {
@@ -78,24 +104,9 @@ class RoutineNamePage extends Component {
     console.log('IN handle Routine', item)
     this.props.dispatch({ type: 'RETRIEVE_SINGLE_ROUTINE', payload: item.id });
     this.props.history.push(`/routine`)
-  }
-  checkEdit = () => {
-    if (this.state.edit === false) {
-      return (
-        <>
-          <button onClick={(item) => this.handleSubmit(item)}>Submit</button>
-          
-        </>
-      )// end return
-     } else {
-      return (
-        <>
-          <button onClick={(item) => this.updateSubmit(item)}>update</button>
-          <button onClick={this.handleCancel}>Cancel</button>
-        </>
-      )// end return 
-    } // end else
-  }// end checkEdit
+  } // end handleRoutine
+
+  
 
   handleRoutineNameEdit = (item) => {
     console.log('In handleRoutineNameEdit', item);
@@ -105,8 +116,17 @@ class RoutineNamePage extends Component {
       id: item.id,
       edit: true
     })
-    let updateRoutine = this.props.reduxStore.routineSingle;
-   
+  } // end handleRoutineNameEdit
+
+  updateSubmit = () => {
+    console.log('in update submit', this.state)
+    this.props.dispatch({type: 'UPDATE_ROUTINE_NAME', payload: this.state})
+
+    this.setState({
+      routineName: '',
+      day: '',
+      edit: false
+    })
   }
 
  

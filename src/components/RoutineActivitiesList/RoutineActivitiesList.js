@@ -63,8 +63,7 @@ class RoutineActivitiesList extends Component {
 
 
   editActivity = (item) => {
-    console.log('In edit Activity', item);
-
+    
     let routinePass = {
       body_part: item.body_part,
       comment: item.comment,
@@ -76,14 +75,11 @@ class RoutineActivitiesList extends Component {
       sets: item.sets,
       edit: true,
     }
-
     this.props.dispatch({ type: 'EDIT_MODE', payload: routinePass })
-
     this.props.updateState(item);
-  }
+  } // end editActivity
 
   deleteActivity = (item) => {
-
     this.props.dispatch({ type: "REMOVE_ACTIVITY", payload: item })
   } // end deleteActivity
 
@@ -168,9 +164,6 @@ class RoutineActivitiesList extends Component {
   }
 
 }
-
-
-
 
 const mapReduxStoreToProps = (reduxStore) => ({
   reduxStore

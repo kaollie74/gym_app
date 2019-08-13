@@ -42,6 +42,21 @@ router.put('/update/:id', (req,res)=> {
   
 })
 
+router.put('/modify/:id', (req,res)=> {
+  console.log('req.params', req.params)
+  console.log('req.body', req.body)
+  const sqlText = `UPDATE "routine" SET "routineName"=$1, "day"=$2 WHERE "id"=$3 `
+  values = [req.body.routineName, req.body.day, req.params.id]
+  pool.query(sqlText, values)
+  .then((response)=> {
+    res.sendStatus(200);
+  })
+  .catch((error)=> {
+    res.sendStatus(500);
+  })
+})
+
+
 
 
 // GET all "routine_names" and "days" from "routine" table

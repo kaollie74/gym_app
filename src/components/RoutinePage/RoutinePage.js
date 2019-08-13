@@ -100,7 +100,6 @@ class RoutinePage extends Component {
     
       edit: false,
     }
-
     this.props.dispatch({ type: 'EDIT_MODE', payload: routinePass })
 
     this.setState({
