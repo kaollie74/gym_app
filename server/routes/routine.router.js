@@ -79,6 +79,23 @@ router.get('/name/:id', (req, res) => {
     })
 })
 
+router.delete('/delete/:id', (req, res)=> {
+  console.log('in /routine/delete/id, req.params.id is:', req.params.id)
+  const sqlText = `DELETE FROM "activity" WHERE "routine_id" = $1;`;
+  const sqlTextTwo = `DELETE FROM "routine" WHERE "id" = $1;`;
+  value = [req.params.id]
+  pool.query(sqlText, value)
+  .then((response)=> {
+    pool.query(sqlTextTwo, value)
+    .then((response)=> {
+      res.sendStatus(200)
+    })
+  })
+  .catch((error)=> {
+    console.log('Error Deleting activities and Routine from DB', error)
+  })
+})
+
 
 
 module.exports = router;
