@@ -8,6 +8,7 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 
 
@@ -18,12 +19,14 @@ const styles = theme => ({
     justifyContent: 'space-around',
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
+    margin: 'auto'
   },
   gridList: {
-    width: 500,
+    width: 1000,
     height: 450,
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: 'translateZ(0)',
+    paddingLeft: 10
   },
   titleBar: {
     background:
@@ -107,15 +110,30 @@ class RoutineNamePage extends Component {
           </select>
           <button onClick={this.handleSubmit}>Submit</button>
         </form>
+        <GridList cellHeight={200} spacing={5} className={classes.gridList}>
+          {this.props.reduxStore.routineNames.map(item => (
+            <GridListTile key={item.id} cols={1} rows={1}>
+              <img src='/images/weights.jpg' alt='plates' onClick={() => this.handleRoutine(item)} />
+              <GridListTileBar
+                
+                title={item.routineName}
+                titlePosition='top'
+                actionIcon={
+                  <IconButton className={classes.icon}>
+                    <StarBorderIcon />
+                  </IconButton>
+                }
+                actionPosition='left'
+                className={classes.titleBar}
+              />
 
-        {this.props.reduxStore.routineNames.map(item => (
-          <div key={item.id}>
-            <button
-              onClick={() => this.handleRoutine(item)}>
-              {item.routineName}
-            </button>
-          </div>
-        ))}
+
+
+
+            </GridListTile>
+
+          ))}
+        </GridList>
       </>
     )
   }
