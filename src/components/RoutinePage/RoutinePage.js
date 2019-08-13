@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import RoutineActivitiesList from '../RoutineActivitiesList/RoutineActivitiesList';
+import Button from '@material-ui/core/Button';
 
 
 class RoutinePage extends Component {
   
-
-
   state = {
     routine_id: this.props.reduxStore.editMode.routine_id,
     body_part: this.props.reduxStore.editMode.body_part,
@@ -146,6 +145,8 @@ class RoutinePage extends Component {
     })
   } // end handleChange
 
+  
+
 
   render() {
     console.log('this.state', this.state);
@@ -170,7 +171,12 @@ class RoutinePage extends Component {
           {/* <button onClick={(item)=>this.handleSubmit(item)}>Submit</button> */}
         </form>
 
-        <h1>{this.props.reduxStore.routineSingle.routineName} - {this.props.reduxStore.routineSingle.day}</h1>
+        <h1>
+        {this.props.reduxStore.routineSingle.routineName} 
+        - 
+        {this.props.reduxStore.routineSingle.day}
+        </h1>
+        <Button>Edit</Button>
         <RoutineActivitiesList updateState={this.updateState} />
 
       </>

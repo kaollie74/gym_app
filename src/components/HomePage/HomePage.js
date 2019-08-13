@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './HomePage.css'
+import WeeklyPage from '../WeeklyPage/WeeklyPage';
 
 //import Material UI
 import Card from '@material-ui/core/Card';
@@ -25,7 +26,7 @@ const styles = theme => ({
     display: 'inline-block',
     width: 400,
     margin: 15,
-    marginLeft: 425,
+    marginLeft: 0,
     height: 300,
     backgroundColor: 'gray',
   },
@@ -132,7 +133,9 @@ class HomePage extends Component {
           <div>
             <LogOutButton className="log-in" />
           </div>
-    
+        <div className="weeklySchedule">
+          <WeeklyPage/>
+        </div>
       </>
 
     )

@@ -47,7 +47,8 @@ class RoutineNamePage extends Component {
 
   state = {
     routineName: '',
-    day: ''
+    day: '',
+    edit: false
   }
 
   // Handles setting a new Routine name and running a dispatch to 
@@ -59,11 +60,10 @@ class RoutineNamePage extends Component {
 
     this.setState({
       routineName: '',
-      day: ''
+      day: '',
+      
     })
   } // end handleSubmit
-
-
 
   handleChange = (event, propsName) => {
     this.setState({
@@ -76,20 +76,45 @@ class RoutineNamePage extends Component {
   // which will eventually place it into its own reducer.
   handleRoutine = (item) => {
     console.log('IN handle Routine', item)
-
     this.props.dispatch({ type: 'RETRIEVE_SINGLE_ROUTINE', payload: item.id });
-
     this.props.history.push(`/routine`)
-
-
   }
+  checkEdit = () => {
+    if (this.state.edit === false) {
+      return (
+        <>
+          <button onClick={(item) => this.handleSubmit(item)}>Submit</button>
+          
+        </>
+      )// end return
+     } else {
+      return (
+        <>
+          <button onClick={(item) => this.updateSubmit(item)}>update</button>
+          <button onClick={this.handleCancel}>Cancel</button>
+        </>
+      )// end return 
+    } // end else
+  }// end checkEdit
+
+  handleRoutineNameEdit = (item) => {
+    console.log('In handleRoutineNameEdit', item);
+    this.setState({
+      routineName: item.routineName,
+      day: item.day,
+      id: item.id,
+      edit: true
+    })
+    let updateRoutine = this.props.reduxStore.routineSingle;
+   
+  }
+
+ 
 
 
   render() {
     const { classes } = this.props;
-
-
-    console.log('this.state', this.state);
+    console.log('this.state', this.state)
 
     return (
       <>
@@ -108,30 +133,25 @@ class RoutineNamePage extends Component {
             <option value="Saturday">Saturday</option>
             <option value="Sunday">Sunday</option>
           </select>
-          <button onClick={this.handleSubmit}>Submit</button>
+          {/* <button onClick={this.handleSubmit}>Submit</button> */}
+         {this.checkEdit()}
         </form>
         <GridList cellHeight={200} spacing={5} className={classes.gridList}>
           {this.props.reduxStore.routineNames.map(item => (
             <GridListTile key={item.id} cols={1} rows={1}>
               <img src='/images/weights.jpg' alt='plates' onClick={() => this.handleRoutine(item)} />
               <GridListTileBar
-                
                 title={item.routineName}
                 titlePosition='top'
                 actionIcon={
                   <IconButton className={classes.icon}>
-                    <StarBorderIcon />
+                    <StarBorderIcon onClick={ () => this.handleRoutineNameEdit(item)} />
                   </IconButton>
                 }
                 actionPosition='left'
                 className={classes.titleBar}
               />
-
-
-
-
             </GridListTile>
-
           ))}
         </GridList>
       </>
