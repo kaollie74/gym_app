@@ -26,7 +26,7 @@ const styles = theme => ({
     height: 450,
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: 'translateZ(0)',
-    paddingLeft: 10
+    paddingLeft: 140
   },
   titleBar: {
     background:

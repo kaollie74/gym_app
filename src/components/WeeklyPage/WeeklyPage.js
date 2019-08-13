@@ -84,6 +84,11 @@ class WeeklyPage extends Component {
     this.props.dispatch({ type: 'UPDATE_ROUTINE_CHECKBOX', payload: checked })
   }// end handleCheck
 
+  handleRoutine = (item) => {
+    console.log('In handleRoutine', item);
+    
+  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -105,6 +110,7 @@ class WeeklyPage extends Component {
                 >
                   <Checkbox
                     type="checkbox"
+                    checked={item.completed}
                     value={this.state.completed}
                     onChange={(event) => this.handleCheck(event, item)}
                   />
@@ -119,6 +125,7 @@ class WeeklyPage extends Component {
                       variant="contained"
                       color="primary"
                       className={classes.button}
+                      onClick = { () => this.handleRoutine(item)}
                     >
                       See Routine
                     </Button>
