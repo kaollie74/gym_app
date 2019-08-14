@@ -2,10 +2,45 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import RoutineActivitiesList from '../RoutineActivitiesList/RoutineActivitiesList';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import { withStyles } from '@material-ui/core/styles';
 
 
+const styles = theme => ({
+  textField: {
+    margin: theme.spacing.unit,
+
+  }
+})
+
+const bodyPart = [
+  {
+    value: 'Chest',
+    label: 'Chest'
+  },
+  {
+    value: 'Back',
+    label: 'Back'
+  },
+  {
+    value: 'Biceps',
+    label: 'Biceps'
+  },
+  {
+    value: 'Triceps',
+    label: 'Triceps'
+  },
+  {
+    value: 'Shoulders',
+    label: 'Shoulders'
+  },
+  {
+    value: 'Legs',
+    label: 'Legs'
+  }
+]
 class RoutinePage extends Component {
-  
+
   state = {
     routine_id: this.props.reduxStore.editMode.routine_id,
     body_part: this.props.reduxStore.editMode.body_part,
@@ -16,10 +51,10 @@ class RoutinePage extends Component {
     edit: false
   }
 
- // Function will update state based on the row of values that exist
- // in RoutineActivitiesList component
- // This function is passed in as a prop to the component
- // in order for this to happen. 
+  // Function will update state based on the row of values that exist
+  // in RoutineActivitiesList component
+  // This function is passed in as a prop to the component
+  // in order for this to happen. 
   updateState = (item) => {
     console.log('In Whatever function', item)
 
@@ -41,14 +76,26 @@ class RoutinePage extends Component {
   checkEdit = () => {
     if (this.props.reduxStore.editMode.edit === true) {
       return (
-      <>  
-      <button onClick={(item) => this.updateSubmit(item)}>update</button>
-      <button onClick={this.handleCancel}>Cancel</button>
-      </>
-        )// end return
+        <>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={(item) => this.updateSubmit(item)}
+          >
+            update
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={this.handleCancel}
+          >
+            Cancel
+          </Button>
+        </>
+      )// end return
     } else {
       return (
-          <button onClick={(item) => this.handleSubmit(item)}>Submit</button>     
+        <Button variant="contained" color="primary" onClick={(item) => this.handleSubmit(item)}>Submit</Button>
       )// end return 
     } // end else
   }// end checkEdit
@@ -56,20 +103,20 @@ class RoutinePage extends Component {
   // function will fire after the user makes changes to their edit. 
   updateSubmit = () => {
     //console.log('In updateSubmit', this.state)
-    this.props.dispatch({type: "EDIT_ACTIVITY", payload: this.state})
-    let routinePass ={
-      body_part:'',
-      comment:'',
-      completed:'',
-      exercise:'',
+    this.props.dispatch({ type: "EDIT_ACTIVITY", payload: this.state })
+    let routinePass = {
+      body_part: '',
+      comment: '',
+      completed: '',
+      exercise: '',
       id: '',
-      reps:'',
+      reps: '',
       routine_id: '',
       sets: '',
       edit: false,
     }
-    this.props.dispatch({type:"EDIT_MODE", payload: routinePass})
-    
+    this.props.dispatch({ type: "EDIT_MODE", payload: routinePass })
+
     this.setState({
       id: '',
       routine_id: '',
@@ -89,15 +136,15 @@ class RoutinePage extends Component {
   handleCancel = () => {
     // create new object
     let routinePass = {
-      body_part:'',
-      comment:'',
-      completed:'',
-      exercise:'',
+      body_part: '',
+      comment: '',
+      completed: '',
+      exercise: '',
       id: '',
       sets: '',
-      reps:'',
+      reps: '',
       routine_id: '',
-    
+
       edit: false,
     }
     this.props.dispatch({ type: 'EDIT_MODE', payload: routinePass })
@@ -112,7 +159,7 @@ class RoutinePage extends Component {
       comments: '',
       edit: false
     })
-   
+
   } // end handleCancel
 
   handleSubmit = (event) => {
@@ -144,38 +191,78 @@ class RoutinePage extends Component {
     })
   } // end handleChange
 
-  
+
 
 
   render() {
     console.log('this.state', this.state);
-      
+    const { classes } = this.props;
     return (
       <>
-        <form>
-          <select value={this.state.body_part} onChange={(event) => this.handleChange(event, 'body_part')} >
-            <option value='default'>Select Body Part</option>
-            <option value="Chest">Chest</option>
-            <option value="Back">Back</option>
-            <option value="Biceps">Biceps</option>
-            <option value="Triceps">Triceps</option>
-            <option value="Shoulders">Shoulders</option>
-            <option value="Legs">Legs</option>
-          </select>
-          <input type='text' placeholder='Exercise Name' value={this.state.exercise} onChange={(event) => this.handleChange(event, 'exercise')} />
-          <input type='number' placeholder='Sets' value={this.state.sets} onChange={(event) => this.handleChange(event, 'sets')} />
-          <input type='number' placeholder='Reps' value={this.state.reps} onChange={(event) => this.handleChange(event, 'reps')} />
-          <input type='text' placeholder='Comments' value={this.state.comments} onChange={(event) => this.handleChange(event, 'comments')} />
+        <form className='activityForm'>
+          <TextField
+            className={classes.textField}
+            id='default'
+            select label='select'
+            value={this.state.body_part}
+            onChange={(event) => this.handleChange(event, 'body_part')}
+            margin='normal'
+          >
+            {bodyPart.map(option => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+            {/* <option value='default'>Select Body Part</option>
+          <option value="Chest">Chest</option>
+          <option value="Back">Back</option>
+          <option value="Biceps">Biceps</option>
+          <option value="Triceps">Triceps</option>
+          <option value="Shoulders">Shoulders</option>
+          <option value="Legs">Legs</option> */}
+          </TextField>
+          <TextField
+            className={classes.textField}
+            id='text'
+            label='Exercise Name'
+            margin='normal'
+            value={this.state.exercise}
+            onChange={(event) => this.handleChange(event, 'exercise')}
+          />
+          <TextField
+            className={classes.textField}
+            id='number'
+            label='Sets'
+            margin='normal'
+            value={this.state.sets}
+            onChange={(event) => this.handleChange(event, 'sets')}
+          />
+          <TextField
+            className={classes.textField}
+            id='number'
+            label='Reps'
+            margin='normal'
+            value={this.state.reps}
+            onChange={(event) => this.handleChange(event, 'reps')}
+          />
+          <TextField
+            className={classes.textField}
+            id='text'
+            label='Comments'
+            margin='normal'
+            value={this.state.comments}
+            onChange={(event) => this.handleChange(event, 'comments')}
+          />
           {this.checkEdit()}
           {/* <button onClick={(item)=>this.handleSubmit(item)}>Submit</button> */}
         </form>
 
         <h1>
-        {this.props.reduxStore.routineSingle.routineName} 
-        - 
+          {this.props.reduxStore.routineSingle.routineName}
+          -
         {this.props.reduxStore.routineSingle.day}
         </h1>
-      
+
         <RoutineActivitiesList updateState={this.updateState} />
 
       </>
@@ -190,4 +277,4 @@ const mapReduxStoreToProps = (reduxStore) => ({
 
 
 
-export default connect(mapReduxStoreToProps)(RoutinePage);
+export default withStyles(styles)(connect(mapReduxStoreToProps)(RoutinePage));

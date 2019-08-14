@@ -1,3 +1,10 @@
+
+.activityForm {
+    height: 100px;
+    background-color: gray;
+    width: 75%;
+}
+
 .backgroundColor {
     background-color: yellow;
     text-decoration-line: 'line-through';

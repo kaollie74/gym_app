@@ -26,7 +26,6 @@ const styles = theme => ({
     flexGrow: 1
   },
   card: {
-  
     width: 300,
     margin: 15,
     marginLeft: 0,
@@ -47,12 +46,16 @@ const styles = theme => ({
   cardContent: {
     fontSize: 12
   },
-  gridList: {
-    width: 300,
-    height: 350
+  masterGrid: {
+    margin: 0,
+    padding: 0,
   },
+
   media: {
     height: 160,
+  },
+  weekly: {
+    marginLeft: 700
   }
 
 })
@@ -68,16 +71,18 @@ class HomePage extends Component {
       <div className={classes.root}>
         <div>
           <Typography className={classes.text} variant="h1" component="h2" gutterBottom>
-            Welcome, GymFit {this.props.user.username}!
+            {/* Welcome,  {this.props.user.username}!
+            <br/> */}
+            GymFit
             </Typography>
 
 
         </div>
-        <Grid xs={6} direction='row' >
+        <Grid className={classes.weekly} container spacing = {5} xs={5} position='right' >
           <WeeklyPage />
         </Grid>
-        <Grid container spacing={12} direction="column">
-          <Grid item xs={2}>
+        <Grid className={classes.masterGrid}container spacing={12} xs={6}>
+          <Grid item xs={6}>
             <Card className={classes.card} >
               <CardContent className={classes.cardContent} >
                 <Typography
@@ -104,7 +109,7 @@ class HomePage extends Component {
             </Card>
           </Grid>
           <br />
-          <Grid>
+          <Grid item xs={6}>
             <Card className={classes.card}>
               <CardContent className={classes.cardContent}>
                 <Typography className={classes.text} variant="h5"
@@ -124,7 +129,7 @@ class HomePage extends Component {
             </Card>
           </Grid>
           <br />
-          <Grid>
+          <Grid item xs={6}>
             <Card className={classes.card}>
 
               <Typography
@@ -145,9 +150,9 @@ class HomePage extends Component {
 
             </Card>
           </Grid>
-          <div>
+          {/* <div>
             <LogOutButton className="log-in" />
-          </div>
+          </div> */}
         
         </Grid>
       </div>
