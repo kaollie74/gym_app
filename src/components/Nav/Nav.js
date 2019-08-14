@@ -21,8 +21,8 @@ const Nav = (props) => (
         <>
           <Link className="nav-link" to='/name'> Routine Name</Link>
           <Link className="nav-link" to='/weekly'> Weekly Schedule</Link>
-          <Link className="nav-link" to='/routine'> The Routine</Link>
-          <Link className="nav-link" to="/database">Routine Database</Link>
+          {/* <Link className="nav-link" to='/routine'> The Routine</Link> */}
+          <Link className="nav-link" to="/database">Gyms Nearby</Link>
           
           
         </>

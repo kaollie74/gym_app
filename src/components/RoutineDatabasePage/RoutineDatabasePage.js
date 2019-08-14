@@ -10,9 +10,9 @@ class RoutineDatabasePage extends Component {
     return (
       <div>
         <div>
-          <p>
-            This Routine Database
-      </p>
+        <p>
+            Gyms Nearby
+        </p>
         </div>
       </div>
     )

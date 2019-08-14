@@ -172,9 +172,9 @@ class RoutinePage extends Component {
       sets: '',
       reps: '',
       routine_id: '',
-
       edit: false,
     }
+    // send empty values to reducer if cancel button is pressed.
     this.props.dispatch({ type: 'EDIT_MODE', payload: routinePass })
 
     this.setState({
@@ -190,6 +190,9 @@ class RoutinePage extends Component {
 
   } // end handleCancel
 
+  // Condition to check if the necessary input fields are filled
+  // run dispatch to POST new Activity.
+  // setState to empty values. 
   handleSubmit = (event) => {
 
     event.preventDefault();
@@ -211,6 +214,7 @@ class RoutinePage extends Component {
     }
   } // end  handleSubmit
 
+  // captures the values of the inputs, and setsState off of them.
   handleChange = (event, propsName) => {
     this.setState({
       routine_id: this.props.reduxStore.routineSingle.id,
@@ -223,7 +227,7 @@ class RoutinePage extends Component {
 
 
   render() {
-    console.log('this.state', this.state);
+    
     const { classes } = this.props;
     return (
       <>
