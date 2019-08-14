@@ -91,8 +91,19 @@ class WeeklyPage extends Component {
 
   render() {
     const { classes } = this.props;
-    return (
+    if (this.props.reduxStore.routineNames.length === 0 ) {
+      
+         return (
+        <>
+          <h1>&nbsp;</h1>
+        </>
+      )
+        
+      
+    } else {
+      return (
       <>
+      
         <Paper className={classes.root}>
           <Table className={classes.table}>
             <TableHead className={classes.tableHead}>
@@ -122,8 +133,8 @@ class WeeklyPage extends Component {
                   </TableCell>
                   <TableCell>
                     <Button
-                    component={Link}
-                    to='/routine'
+                      component={Link}
+                      to='/routine'
                       variant="contained"
                       color="primary"
                       className={classes.button}
@@ -139,7 +150,8 @@ class WeeklyPage extends Component {
           </Table>
         </Paper>
       </>
-    )
+      )
+    }
 
   }
 } // end WeeklyPage

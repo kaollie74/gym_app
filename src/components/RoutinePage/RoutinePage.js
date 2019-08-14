@@ -175,7 +175,7 @@ class RoutinePage extends Component {
         - 
         {this.props.reduxStore.routineSingle.day}
         </h1>
-        <Button>Edit</Button>
+      
         <RoutineActivitiesList updateState={this.updateState} />
 
       </>

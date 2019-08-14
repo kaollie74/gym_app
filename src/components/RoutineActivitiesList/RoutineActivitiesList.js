@@ -49,7 +49,7 @@ const styles = theme => ({
 });
 
 class RoutineActivitiesList extends Component {
-
+  // local state on page load
   state = {
     body_part: '',
     comment: '',
@@ -63,7 +63,7 @@ class RoutineActivitiesList extends Component {
 
 
   editActivity = (item) => {
-    
+
     let routinePass = {
       body_part: item.body_part,
       comment: item.comment,
@@ -83,6 +83,8 @@ class RoutineActivitiesList extends Component {
     this.props.dispatch({ type: "REMOVE_ACTIVITY", payload: item })
   } // end deleteActivity
 
+  // Function will Remove entire routine from the Database
+  // by capture the values and running a dispatch
   handleRoutineDelete = () => {
     let routine = this.props.reduxStore.routineSingle;
     let deleteRoutine = {
@@ -91,76 +93,82 @@ class RoutineActivitiesList extends Component {
       day: routine.day,
       completed: routine.completed
     }
-    console.log('newObject', deleteRoutine);
-
     this.props.dispatch({ type: 'DELETE_ROUTINE', payload: deleteRoutine })
   }// end handleRoutineDelete
 
   render() {
 
     const { classes } = this.props;
-    return (
-      <>
-        <Paper className={classes.root}>
-          <Table>
-            <TableHead className={classes.tableHead}>
-              <TableRow>
-                <th>Body Part</th>
-                <th>Exercise</th>
-                <th>Sets</th>
-                <th>Reps</th>
-                <th>Comments</th>
-                <th>Edit</th>
-                <th>Remove</th>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {this.props.reduxStore.activities.map(item => (
-                <tr key={item.id}>
-                  <TableCell>{item.body_part}</TableCell>
-                  <TableCell>{item.exercise}</TableCell>
-                  <TableCell>{item.sets}</TableCell>
-                  <TableCell>{item.reps}</TableCell>
-                  <TableCell>{item.comment}</TableCell>
-                  <TableCell>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      className={classes.button}
-                      onClick={() => this.editActivity(item)}
-                    >
-                      Edit
+    if (this.props.reduxStore.activities.length !== 0) {
+      return (
+        <>
+          <Paper className={classes.root}>
+            <Table>
+              <TableHead className={classes.tableHead}>
+                <TableRow>
+                  <th>Body Part</th>
+                  <th>Exercise</th>
+                  <th>Sets</th>
+                  <th>Reps</th>
+                  <th>Comments</th>
+                  <th>Edit</th>
+                  <th>Remove</th>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {this.props.reduxStore.activities.map(item => (
+                  <tr key={item.id}>
+                    <TableCell>{item.body_part}</TableCell>
+                    <TableCell>{item.exercise}</TableCell>
+                    <TableCell>{item.sets}</TableCell>
+                    <TableCell>{item.reps}</TableCell>
+                    <TableCell>{item.comment}</TableCell>
+                    <TableCell>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        className={classes.button}
+                        onClick={() => this.editActivity(item)}
+                      >
+                        Edit
                     </Button>
-                  </TableCell>
-                  <TableCell>
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      className={classes.button}
-                      onClick={() => this.deleteActivity(item)}
-                    >
-                      Delete
+                    </TableCell>
+                    <TableCell>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        className={classes.button}
+                        onClick={() => this.deleteActivity(item)}
+                      >
+                        Delete
                     </Button>
-                  </TableCell>
-                </tr>
+                    </TableCell>
+                  </tr>
 
-              ))}
-            </TableBody>
-          </Table>
-        </Paper>
+                ))}
+              </TableBody>
+            </Table>
+          </Paper>
 
-        <Button
-          component={Link}
-          to='/name'
-          variant="contained"
-          color="secondary"
-          className={classes.deleteButton}
-          onClick={this.handleRoutineDelete}
-        >
-          Delete Routine
+          <Button
+            component={Link}
+            to='/name'
+            variant="contained"
+            color="secondary"
+            className={classes.deleteButton}
+            onClick={this.handleRoutineDelete}
+          >
+            Delete Routine
         </Button>
+        </>
+      )
+    } else {
+      return (
+      <>
+      <h1>&nbsp;</h1>
       </>
-    )
+      )
+    }
   }
 
 }

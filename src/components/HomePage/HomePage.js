@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
-
+import Grid from '@material-ui/core/Grid';
 
 
 // this could also be written with destructuring parameters as:
@@ -22,9 +22,12 @@ import { Link } from 'react-router-dom';
 
 
 const styles = theme => ({
+  root: {
+    flexGrow: 1
+  },
   card: {
-    display: 'inline-block',
-    width: 400,
+  
+    width: 300,
     margin: 15,
     marginLeft: 0,
     height: 300,
@@ -32,17 +35,17 @@ const styles = theme => ({
   },
   enter: {
     marginTop: 20,
-    marginLeft: 140
+    marginLeft: 100
   },
   title: {
-    fontSize: 16,
+    fontSize: 12,
     textAlign: 'center'
   },
   text: {
     textAlign: 'center',
   },
   cardContent: {
-    fontSize: 14
+    fontSize: 12
   },
   gridList: {
     width: 300,
@@ -62,81 +65,92 @@ class HomePage extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <>
-          <div>
-            <Typography className={classes.text} variant="h1" component="h2" gutterBottom>
-              Welcome, GymFit {this.props.user.username}!
+      <div className={classes.root}>
+        <div>
+          <Typography className={classes.text} variant="h1" component="h2" gutterBottom>
+            Welcome, GymFit {this.props.user.username}!
             </Typography>
-        
 
-          </div>
-          <Card className={classes.card} >
-            <CardContent className={classes.cardContent} >
-              <Typography className={classes.text} variant="h4" component="h2">
-                Build Your Routine
+
+        </div>
+        <Grid xs={6} direction='row' >
+          <WeeklyPage />
+        </Grid>
+        <Grid container spacing={12} direction="column">
+          <Grid item xs={2}>
+            <Card className={classes.card} >
+              <CardContent className={classes.cardContent} >
+                <Typography
+                  className={classes.text} variant="h5"
+                >
+                  Build Your Routine
               </Typography>
-            <CardMedia
-              className={classes.media}
-              image="/images/weights.jpg"
-              title="Weights"
-            />
-              <Button
+                <CardMedia
+                  className={classes.media}
+                  image="/images/weights.jpg"
+                  title="Weights"
+                />
+                <Button
+                  component={Link}
+                  to='/name'
+                  className={classes.enter}
+                  color="primary"
+                  onClick={this.BuildARoutineName}
+                  variant="contained">
+                  Enter
+                </Button>
+
+              </CardContent>
+            </Card>
+          </Grid>
+          <br />
+          <Grid>
+            <Card className={classes.card}>
+              <CardContent className={classes.cardContent}>
+                <Typography className={classes.text} variant="h5"
+                >
+                  Weekly Routine
+              </Typography>
+                <Button
+                  component={Link}
+                  to='/weekly'
+                  color="primary"
+                  className={classes.enter}
+                  onClick={this.weeklyRoutine}
+                  variant="contained">
+                  Enter
+                </Button>
+              </CardContent>
+            </Card>
+          </Grid>
+          <br />
+          <Grid>
+            <Card className={classes.card}>
+
+              <Typography
+                style={{ marginTop: 20, marginLeft: 60 }}
+                variant="h5"
+              >
+                Routine Database
+            </Typography>
+              <Button style={{ marginLeft: 160 }}
                 component={Link}
-                to='/name'
+                to='/database'
                 className={classes.enter}
                 color="primary"
-                onClick={this.BuildARoutineName}
+                onClick={this.routineDatabase}
                 variant="contained">
                 Enter
             </Button>
-           
-            </CardContent>
-          </Card>
-          <br />
-          <Card className={classes.card}>
-            <CardContent className={classes.cardContent}>
-              <Typography className={classes.text} variant="h4" component="h2">
-                Weekly Routine
-              </Typography>
-              <Button
-                component={Link}
-                to='/weekly'
-                color="primary"
-                className={classes.enter}
-                onClick={this.weeklyRoutine}
-                variant="contained">
-                Enter
-            </Button>
-            </CardContent>
-          </Card>
-          <br />
-          <Card className={classes.card}>
 
-            <Typography
-              style={{ marginTop: 20, marginLeft: 60 }}
-              variant="h4"
-              component="h2">
-              Routine Database
-            </Typography>
-            <Button style={{ marginLeft: 160 }}
-              component={Link}
-              to='/database'
-              className={classes.enter}
-              color="primary"
-              onClick={this.routineDatabase}
-              variant="contained">
-              Enter
-            </Button>
-
-          </Card>
-
+            </Card>
+          </Grid>
           <div>
             <LogOutButton className="log-in" />
           </div>
-        <div className="weeklySchedule">
-          <WeeklyPage/>
-        </div>
-      </>
+        
+        </Grid>
+      </div>
 
     )
   }

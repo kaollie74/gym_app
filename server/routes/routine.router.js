@@ -62,9 +62,9 @@ router.put('/modify/:id', (req,res)=> {
 // GET all "routine_names" and "days" from "routine" table
 router.get('/name', (req,res)=> {
   console.log(req.body.id);
-  const sqlText = `SELECT * FROM "routine" ORDER BY "id";`;
+  const sqlText = `SELECT * FROM "routine" WHERE "user_id"=$1 ORDER BY "id";`;
   
-  pool.query(sqlText)
+  pool.query(sqlText, [req.user.id])
   .then((response)=> {
     
     res.send(response.rows)
