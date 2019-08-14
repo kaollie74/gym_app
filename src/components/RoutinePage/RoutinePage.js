@@ -4,15 +4,33 @@ import RoutineActivitiesList from '../RoutineActivitiesList/RoutineActivitiesLis
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import { Typography } from '@material-ui/core';
+import CardContent from '@material-ui/core/CardContent';
 
 
 const styles = theme => ({
+  button: {
+    margin: 10
+  },
+  card: {
+    margin: 'auto',
+    width: 300
+  },
   textField: {
     margin: theme.spacing.unit,
 
+  },
+  text: {
+    fontSize: 36,
+    margin: 'auto'
   }
+ 
+
 })
 
+// Array of objects for the drop down
+//menu on the form 
 const bodyPart = [
   {
     value: 'Chest',
@@ -78,9 +96,11 @@ class RoutinePage extends Component {
       return (
         <>
           <Button
+            className='button'
             variant="contained"
             color="primary"
             onClick={(item) => this.updateSubmit(item)}
+            size="small"
           >
             update
           </Button>
@@ -88,6 +108,7 @@ class RoutinePage extends Component {
             variant="contained"
             color="secondary"
             onClick={this.handleCancel}
+            size="small"
           >
             Cancel
           </Button>
@@ -95,7 +116,14 @@ class RoutinePage extends Component {
       )// end return
     } else {
       return (
-        <Button variant="contained" color="primary" onClick={(item) => this.handleSubmit(item)}>Submit</Button>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={(item) => this.handleSubmit(item)}
+          size='small'
+        >
+          Submit
+          </Button>
       )// end return 
     } // end else
   }// end checkEdit
@@ -213,13 +241,6 @@ class RoutinePage extends Component {
                 {option.label}
               </option>
             ))}
-            {/* <option value='default'>Select Body Part</option>
-          <option value="Chest">Chest</option>
-          <option value="Back">Back</option>
-          <option value="Biceps">Biceps</option>
-          <option value="Triceps">Triceps</option>
-          <option value="Shoulders">Shoulders</option>
-          <option value="Legs">Legs</option> */}
           </TextField>
           <TextField
             className={classes.textField}
@@ -257,11 +278,15 @@ class RoutinePage extends Component {
           {/* <button onClick={(item)=>this.handleSubmit(item)}>Submit</button> */}
         </form>
 
-        <h1>
-          {this.props.reduxStore.routineSingle.routineName}
-          -
-        {this.props.reduxStore.routineSingle.day}
-        </h1>
+        <Card className={classes.card}>
+          <CardContent>
+            <Typography className={classes.text}>
+              {this.props.reduxStore.routineSingle.routineName}
+              -
+              {this.props.reduxStore.routineSingle.day}
+            </Typography>
+          </CardContent>
+        </Card>
 
         <RoutineActivitiesList updateState={this.updateState} />
 

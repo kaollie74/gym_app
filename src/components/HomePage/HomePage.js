@@ -16,6 +16,7 @@ import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 
 
+
 // this could also be written with destructuring parameters as:
 // const UserPage = ({ user }) => (
 // and then instead of `props.user.username` you could use `user.username`
@@ -35,6 +36,13 @@ const styles = theme => ({
   enter: {
     marginTop: 20,
     marginLeft: 100
+  },
+  gymFit: {
+    backgroundColor: '#9b969c',
+    marginTop: 10,
+    margin: 'auto',
+    width: 800,
+    
   },
   title: {
     fontSize: 12,
@@ -69,7 +77,7 @@ class HomePage extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <div>
+        <Card className={classes.gymFit}>
           <Typography className={classes.text} variant="h1" component="h2" gutterBottom>
             {/* Welcome,  {this.props.user.username}!
             <br/> */}
@@ -77,7 +85,7 @@ class HomePage extends Component {
             </Typography>
 
 
-        </div>
+        </Card >
         <Grid className={classes.weekly} container spacing = {5} xs={5} position='right' >
           <WeeklyPage />
         </Grid>
@@ -136,7 +144,7 @@ class HomePage extends Component {
                 style={{ marginTop: 20, marginLeft: 60 }}
                 variant="h5"
               >
-                Routine Database
+                Gyms NearBy
             </Typography>
               <Button style={{ marginLeft: 160 }}
                 component={Link}

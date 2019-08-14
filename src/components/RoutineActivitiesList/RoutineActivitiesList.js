@@ -11,12 +11,15 @@ import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+import EditIcon from '@material-ui/icons/Edit';
 
 const styles = theme => ({
   root: {
     width: '80%',
     margin: 'auto',
-    marginTop: theme.spacing.unit * 20,
+    marginTop: theme.spacing.unit,
     overflowX: 'auto',
 
   },
@@ -43,8 +46,8 @@ const styles = theme => ({
     padding: 'auto',
   },
   deleteButton: {
-    margin: 50,
-    marginLeft: 500,
+    marginTop: 0,
+    marginLeft: 950,
   }
 });
 
@@ -102,6 +105,16 @@ class RoutineActivitiesList extends Component {
     if (this.props.reduxStore.activities.length !== 0) {
       return (
         <>
+          <Button
+            component={Link}
+            to='/name'
+            variant="contained"
+            color="secondary"
+            className={classes.deleteButton}
+            onClick={this.handleRoutineDelete}
+          >
+            Delete Routine
+        </Button>
           <Paper className={classes.root}>
             <Table>
               <TableHead className={classes.tableHead}>
@@ -124,24 +137,26 @@ class RoutineActivitiesList extends Component {
                     <TableCell>{item.reps}</TableCell>
                     <TableCell>{item.comment}</TableCell>
                     <TableCell>
-                      <Button
+                      <IconButton
+                        arial-label="Edit"
                         variant="contained"
                         color="primary"
                         className={classes.button}
                         onClick={() => this.editActivity(item)}
                       >
-                        Edit
-                    </Button>
+                        <EditIcon />
+                      </IconButton>
                     </TableCell>
                     <TableCell>
-                      <Button
+                      <IconButton
+                        aria-label="Delete"
                         variant="contained"
                         color="secondary"
                         className={classes.button}
                         onClick={() => this.deleteActivity(item)}
                       >
-                        Delete
-                    </Button>
+                        <DeleteIcon />
+                      </IconButton>
                     </TableCell>
                   </tr>
 
@@ -150,23 +165,14 @@ class RoutineActivitiesList extends Component {
             </Table>
           </Paper>
 
-          <Button
-            component={Link}
-            to='/name'
-            variant="contained"
-            color="secondary"
-            className={classes.deleteButton}
-            onClick={this.handleRoutineDelete}
-          >
-            Delete Routine
-        </Button>
+
         </>
       )
     } else {
       return (
-      <>
-      <h1>&nbsp;</h1>
-      </>
+        <>
+          <h1>&nbsp;</h1>
+        </>
       )
     }
   }

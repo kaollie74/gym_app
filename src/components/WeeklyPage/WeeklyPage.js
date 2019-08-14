@@ -99,7 +99,6 @@ class WeeklyPage extends Component {
         </>
       )
         
-      
     } else {
       return (
       <>

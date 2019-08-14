@@ -8,7 +8,7 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
+import EditIcon from '@material-ui/icons/Edit';
 
 
 
@@ -43,6 +43,7 @@ class RoutineNamePage extends Component {
 
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_ROUTINE_NAMES' })
+    this.props.dispatch({type: 'FETCH_IMAGES'})
   }
 
   state = {
@@ -159,13 +160,13 @@ class RoutineNamePage extends Component {
         <GridList cellHeight={200} spacing={5} className={classes.gridList}>
           {this.props.reduxStore.routineNames.map(item => (
             <GridListTile key={item.id} cols={1} rows={1}>
-              <img src='/images/weights.jpg' alt='plates' onClick={() => this.handleRoutine(item)} />
+              <img src={this.props.reduxStore.imagesReduce.url}alt='plates' onClick={() => this.handleRoutine(item)} />
               <GridListTileBar
                 title={item.routineName}
                 titlePosition='top'
                 actionIcon={
                   <IconButton className={classes.icon}>
-                    <StarBorderIcon onClick={ () => this.handleRoutineNameEdit(item)} />
+                    <EditIcon onClick={ () => this.handleRoutineNameEdit(item)} />
                   </IconButton>
                 }
                 actionPosition='left'
