@@ -14,6 +14,8 @@ import { Link } from 'react-router-dom';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
+import Swal from 'sweetalert2';
+import {withRouter} from 'react-router-dom';
 
 const styles = theme => ({
   root: {
@@ -93,14 +95,53 @@ class RoutineActivitiesList extends Component {
   // Function will Remove entire routine from the Database
   // by capture the values and running a dispatch
   handleRoutineDelete = () => {
-    let routine = this.props.reduxStore.routineSingle;
-    let deleteRoutine = {
-      id: routine.id,
-      routineName: routine.routineName,
-      day: routine.day,
-      completed: routine.completed
-    }
-    this.props.dispatch({ type: 'DELETE_ROUTINE', payload: deleteRoutine })
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+        let routine = this.props.reduxStore.routineSingle;
+        let deleteRoutine = {
+          id: routine.id,
+          routineName: routine.routineName,
+          day: routine.day,
+          completed: routine.completed
+        }
+        
+        this.props.dispatch({ type: 'DELETE_ROUTINE', payload: deleteRoutine });
+        this.props.history.push('/name');
+        
+      
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Your imaginary file is safe :)',
+          'error'
+        )
+      }
+    })
+
   }// end handleRoutineDelete
 
   render() {
@@ -110,8 +151,8 @@ class RoutineActivitiesList extends Component {
       return (
         <>
           <Button
-            component={Link}
-            to='/name'
+            // component={Link}
+            // to='/name'
             variant="contained"
             color="secondary"
             className={classes.deleteButton}
@@ -189,4 +230,4 @@ const mapReduxStoreToProps = (reduxStore) => ({
 
 
 
-export default withStyles(styles)(connect(mapReduxStoreToProps)(RoutineActivitiesList));
+export default withStyles(styles)(withRouter(connect(mapReduxStoreToProps)(RoutineActivitiesList)));

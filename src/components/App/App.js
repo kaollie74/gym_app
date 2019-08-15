@@ -59,7 +59,7 @@ class App extends Component {
               <ProtectedRoute
                 exact
                 path="/name"
-                component={RoutineNamePage} />
+                render={(props)=> <RoutineNamePage {...props}/>} />
             
 
             

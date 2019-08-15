@@ -13,6 +13,7 @@ import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 
 
+
 const styles = theme => ({
   root: {
     width: '80%',
@@ -25,7 +26,7 @@ const styles = theme => ({
     marginLeft: 0,
   },
   table: {
-    minWidth: 400,
+    minWidth: 300,
   },
   tableHead: {
     backgroundColor: 'black',
@@ -80,65 +81,65 @@ class WeeklyPage extends Component {
 
   render() {
     const { classes } = this.props;
-    if (this.props.reduxStore.routineNames.length === 0 ) {
-      
-         return (
+    if (this.props.reduxStore.routineNames.length === 0) {
+
+      return (
         <>
           <h1>&nbsp;</h1>
         </>
       )
-        
+
     } else {
       return (
-      <>
-      
-        <Paper className={classes.root}>
-          <Table className={classes.table}>
-            <TableHead className={classes.tableHead}>
-              <th>&nbsp;</th>
-              <th>DAY</th>
-              <th>Routine Name</th>
-              <th>See Routine</th>
-            </TableHead>
+        <>
 
-            <TableBody className={classes.row}>
-              {this.props.reduxStore.routineNames.map(item => (
-                <TableRow
-                  key={item.id}
+          <Paper className={classes.root}>
+            <Table className={classes.table}>
+              <TableHead className={classes.tableHead}>
+                <th>&nbsp;</th>
+                <th>DAY</th>
+                <th>Routine Name</th>
+                <th>See Routine</th>
+              </TableHead>
+
+              <TableBody className={classes.row}>
+                {this.props.reduxStore.routineNames.map(item => (
+                  <TableRow
+                    key={item.id}
                   // className={item.completed ? 'backgroundColor' : ''}
-                >
-                  <Checkbox
-                    type="checkbox"
-                    checked={item.completed}
-                    value={this.state.completed}
-                    onChange={(event) => this.handleCheck(event, item)}
-                  />
-                  <TableCell className={item.completed ? 'backgroundColor' : ''}>
-                  {item.day}
-                  </TableCell>
-                  <TableCell className={item.completed ? 'backgroundColor' : ''} >
-                    {item.routineName}
-                  </TableCell>
-                  <TableCell>
-                    <Button
-                      component={Link}
-                      to='/routine'
-                      variant="contained"
-                      color="primary"
-                      className={classes.button}
-                      onClick={() => this.handleRoutine(item)}
-                      size="small"
-                    >
-                      See Routine
+                  >
+                    <Checkbox
+                      type="checkbox"
+                      checked={item.completed}
+                      value={this.state.completed}
+                      onChange={(event) => this.handleCheck(event, item)}
+                    />
+                    <TableCell className={item.completed ? 'backgroundColor' : ''}>
+                      {item.day}
+                    </TableCell>
+                    <TableCell className={item.completed ? 'backgroundColor' : ''} >
+                      {item.routineName}
+                    </TableCell>
+                    <TableCell>
+                      <Button
+                        component={Link}
+                        to='/routine'
+                        variant="contained"
+                        color="primary"
+                        className={classes.button}
+                        onClick={() => this.handleRoutine(item)}
+                        size="small"
+                      >
+                        See Routine
                     </Button>
-                  </TableCell>
-                </TableRow>
+                    </TableCell>
+                  </TableRow>
 
-              ))}
-            </TableBody>
-          </Table>
-        </Paper>
-      </>
+                ))}
+              </TableBody>
+            </Table>
+          </Paper>
+        </>
       )
     }
 
