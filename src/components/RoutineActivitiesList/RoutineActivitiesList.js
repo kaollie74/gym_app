@@ -64,7 +64,9 @@ class RoutineActivitiesList extends Component {
     sets: '',
   }
 
-
+  // capture values of current row in activity table place them in a new object.
+  // run a dispatch to the edit reducer with new object.
+  // pass the current values called 'item' into the updateState function.
   editActivity = (item) => {
 
     let routinePass = {
@@ -82,9 +84,11 @@ class RoutineActivitiesList extends Component {
     this.props.updateState(item);
   } // end editActivity
 
+  // Send dispatch of row to be removed from table
   deleteActivity = (item) => {
     this.props.dispatch({ type: "REMOVE_ACTIVITY", payload: item })
   } // end deleteActivity
+
 
   // Function will Remove entire routine from the Database
   // by capture the values and running a dispatch

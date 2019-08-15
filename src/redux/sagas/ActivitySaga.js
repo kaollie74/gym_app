@@ -27,15 +27,15 @@ function* postActivity(action) {
   }
 
 }
-
+// generator function that retrieves all activities by targeting
+// the routine_id,
+// then sends that data to  the ActivitiesReducer
 function* getRoutineActivities(action) {
 
   try {
-    console.log("in get Routine Activities", action.payload)
-
+    
     const response = yield axios.get(`/activity/${action.payload.routine_id}`)
 
-    console.log(' in getRoutineActivities action.payload is', action.payload)
 
     yield put({ type: 'SET_ROUTINE_ACTIVITIES', payload: response.data})
   }
@@ -46,6 +46,8 @@ function* getRoutineActivities(action) {
 
 }
 
+// generator function that retrieves the routine name and day from 'routine' table
+// and sets into Activity Reducer
 function* getInitialRoutineActivities(action){
   try {
     console.log('IN GET initial routine activities generator function. action.payload is:', action.payload)
@@ -60,6 +62,8 @@ function* getInitialRoutineActivities(action){
   }
 }
 
+// generator function that will remove activity from the 'activities' table 
+// then runs put to activate the getRoutineActivities generator function
 function* removeActivity (action){
   try{
 
@@ -74,6 +78,7 @@ function* removeActivity (action){
   }
 }
 // This generator function runs an 'Axios.put'. Afterwards, it runs a
+// a put to activate the getRoutineActivities generator function
 function* editActivity (action){
   try{
     yield axios.put(`/activity/update/${action.payload.id}`, action.payload);

@@ -1,5 +1,4 @@
 
-
 const EditModeReducer = (state = {
   body_part: '',
   comments: '',

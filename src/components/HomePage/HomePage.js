@@ -14,13 +14,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
-
-
-
-// this could also be written with destructuring parameters as:
-// const UserPage = ({ user }) => (
-// and then instead of `props.user.username` you could use `user.username`
-
+//import Paper from '@material-ui/core/Paper';
 
 const styles = theme => ({
   root: {
@@ -28,21 +22,25 @@ const styles = theme => ({
   },
   card: {
     width: 300,
-    margin: 15,
-    marginLeft: 0,
+    marginLeft: 10,
+    marginBottom: 15,
     height: 300,
     backgroundColor: 'gray',
   },
+ 
   enter: {
     marginTop: 20,
     marginLeft: 100
   },
   gymFit: {
-    backgroundColor: '#9b969c',
-    marginTop: 10,
-    margin: 'auto',
-    width: 800,
-    
+    backgroundColor: 'gray',
+    marginTop: 2,
+
+  },
+  paper: {
+    padding: theme.spacing.unit * 2,
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
   },
   title: {
     fontSize: 12,
@@ -55,16 +53,13 @@ const styles = theme => ({
     fontSize: 12
   },
   masterGrid: {
-    margin: 0,
-    padding: 0,
+    margin: 20,
   },
 
   media: {
     height: 160,
   },
-  weekly: {
-    marginLeft: 700
-  }
+ 
 
 })
 
@@ -76,92 +71,110 @@ class HomePage extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div className={classes.root}>
+      <div>
         <Card className={classes.gymFit}>
           <Typography className={classes.text} variant="h1" component="h2" gutterBottom>
             {/* Welcome,  {this.props.user.username}!
             <br/> */}
             GymFit
             </Typography>
-
-
         </Card >
-        <Grid className={classes.weekly} container spacing = {5} xs={5} position='right' >
-          <WeeklyPage />
-        </Grid>
-        <Grid className={classes.masterGrid}container spacing={12} xs={6}>
+
+        <Grid className={classes.masterGrid} container spacing={24} >
+ 
           <Grid item xs={6}>
-            <Card className={classes.card} >
-              <CardContent className={classes.cardContent} >
-                <Typography
-                  className={classes.text} variant="h5"
-                >
-                  Build Your Routine
+            <Grid className={classes.cardContainer} container spacing={12}>
+              <Grid item xs={6}>
+                <Card className={classes.card} >
+                  <CardContent className={classes.cardContent} >
+                    <Typography
+                      className={classes.text} variant="h5"
+                    >
+                      Build Your Routine
               </Typography>
-                <CardMedia
-                  className={classes.media}
-                  image="/images/weights.jpg"
-                  title="Weights"
-                />
-                <Button
-                  component={Link}
-                  to='/name'
-                  className={classes.enter}
-                  color="primary"
-                  onClick={this.BuildARoutineName}
-                  variant="contained">
-                  Enter
+                    <CardMedia
+                      className={classes.media}
+                      image="/images/weights.jpg"
+                      title="Weights"
+                    />
+                    <Button
+                      component={Link}
+                      to='/name'
+                      className={classes.enter}
+                      color="primary"
+                      onClick={this.BuildARoutineName}
+                      variant="contained">
+                      Enter
                 </Button>
 
-              </CardContent>
-            </Card>
-          </Grid>
-          <br />
-          <Grid item xs={6}>
-            <Card className={classes.card}>
-              <CardContent className={classes.cardContent}>
-                <Typography className={classes.text} variant="h5"
-                >
-                  Weekly Routine
-              </Typography>
-                <Button
-                  component={Link}
-                  to='/weekly'
-                  color="primary"
-                  className={classes.enter}
-                  onClick={this.weeklyRoutine}
-                  variant="contained">
-                  Enter
-                </Button>
-              </CardContent>
-            </Card>
-          </Grid>
-          <br />
-          <Grid item xs={6}>
-            <Card className={classes.card}>
+                  </CardContent>
+                </Card>
+              </Grid>
 
-              <Typography
-                style={{ marginTop: 20, marginLeft: 60 }}
-                variant="h5"
-              >
-                Gyms NearBy
+              <br />
+              <Grid item xs={6}>
+                <Card className={classes.card}>
+                  <CardContent className={classes.cardContent}>
+                    <Typography className={classes.text} variant="h5"
+                    >
+                      Weekly Routine
+              </Typography>
+                    <CardMedia
+                      className={classes.media}
+                      image="/images/weights.jpg"
+                      title="Weights"
+                    />
+                    <Button
+                      component={Link}
+                      to='/weekly'
+                      color="primary"
+                      className={classes.enter}
+                      onClick={this.weeklyRoutine}
+                      variant="contained">
+                      Enter
+                </Button>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <br />
+              <Grid item xs={6}>
+                <Card className={classes.card}>
+                  <CardContent className={classes.cardContent}>
+                    <Typography
+                      style={{ marginTop: 20, marginLeft: 60 }}
+                      variant="h5"
+                    >
+                      Gyms NearBy
             </Typography>
-              <Button style={{ marginLeft: 160 }}
-                component={Link}
-                to='/database'
-                className={classes.enter}
-                color="primary"
-                onClick={this.routineDatabase}
-                variant="contained">
-                Enter
+                    <CardMedia
+                      className={classes.media}
+                      image="/images/weights.jpg"
+                      title="Weights"
+                    />
+                    <Button
+                      component={Link}
+                      to='/database'
+                      className={classes.enter}
+                      color="primary"
+                      onClick={this.routineDatabase}
+                      variant="contained"
+                    >
+                      Enter
             </Button>
-
-            </Card>
+                  </CardContent>
+                </Card>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid>
+            <Grid item xs={12}>
+            <WeeklyPage />
+            </Grid>
           </Grid>
           {/* <div>
             <LogOutButton className="log-in" />
           </div> */}
-        
+
         </Grid>
       </div>
 

@@ -10,9 +10,9 @@ router.post('/name', (req,res)=> {
   console.log('req.user.id', req.user.id);
   console.log('req.body', req.body)
   
-  const sqlText = `INSERT INTO "routine" ("routineName", "day", "user_id")
-                    Values($1, $2, $3);`
-  values = [req.body.routineName, req.body.day, req.user.id]
+  const sqlText = `INSERT INTO "routine" ("routineName", "day", "user_id", "image")
+                    Values($1, $2, $3, $4);`
+  values = [req.body.routineName, req.body.day, req.user.id, req.body.image]
   pool.query(sqlText, values)
   .then((response)=> {
     res.sendStatus(201)
@@ -45,8 +45,8 @@ router.put('/update/:id', (req,res)=> {
 router.put('/modify/:id', (req,res)=> {
   console.log('req.params', req.params)
   console.log('req.body', req.body)
-  const sqlText = `UPDATE "routine" SET "routineName"=$1, "day"=$2 WHERE "id"=$3 `
-  values = [req.body.routineName, req.body.day, req.params.id]
+  const sqlText = `UPDATE "routine" SET "routineName"=$1, "day"=$2, "image"=$3 WHERE "id"=$4;`;
+  values = [req.body.routineName, req.body.day, req.body.image, req.params.id];
   pool.query(sqlText, values)
   .then((response)=> {
     res.sendStatus(200);

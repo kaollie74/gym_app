@@ -13,22 +13,11 @@ import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 
 
-
-// const CustomTableCell = withStyles(theme => ({
-//   head: {
-//     backgroundColor: theme.palette.common.black,
-//     color: theme.palette.common.white,
-//   },
-//   body: {
-//     fontSize: 14,
-//   },
-// }))(TableCell);
-
 const styles = theme => ({
   root: {
     width: '80%',
     margin: 'auto',
-    marginTop: theme.spacing.unit * 20,
+    marginTop: theme.spacing.unit,
     overflowX: 'auto',
 
   },
@@ -116,7 +105,7 @@ class WeeklyPage extends Component {
               {this.props.reduxStore.routineNames.map(item => (
                 <TableRow
                   key={item.id}
-                  className={item.completed ? 'backgroundColor' : ''}
+                  // className={item.completed ? 'backgroundColor' : ''}
                 >
                   <Checkbox
                     type="checkbox"
@@ -124,10 +113,10 @@ class WeeklyPage extends Component {
                     value={this.state.completed}
                     onChange={(event) => this.handleCheck(event, item)}
                   />
-                  <TableCell>{
-                    item.day}
+                  <TableCell className={item.completed ? 'backgroundColor' : ''}>
+                  {item.day}
                   </TableCell>
-                  <TableCell className={classes.name}>
+                  <TableCell className={item.completed ? 'backgroundColor' : ''} >
                     {item.routineName}
                   </TableCell>
                   <TableCell>
@@ -138,6 +127,7 @@ class WeeklyPage extends Component {
                       color="primary"
                       className={classes.button}
                       onClick={() => this.handleRoutine(item)}
+                      size="small"
                     >
                       See Routine
                     </Button>

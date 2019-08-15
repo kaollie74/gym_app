@@ -6,8 +6,9 @@
 }
 
 .backgroundColor {
-    background-color: yellow;
-    text-decoration-line: 'line-through';
+     opacity: 0.2;
+     filter: alpha(opacity=60);
+    text-decoration-line: line-through;
 }
 
 
@@ -21,6 +22,7 @@ body {
 .buildRoutineForm {
     width: 25%;
     height: 60px;
+    margin-left: 700px
 
 }
 
