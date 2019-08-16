@@ -11,7 +11,7 @@ import CardContent from '@material-ui/core/CardContent';
 
 const styles = theme => ({
   button: {
-    margin: 10
+    margin: 100
   },
   card: {
     margin: 'auto',
@@ -19,13 +19,15 @@ const styles = theme => ({
   },
   textField: {
     margin: theme.spacing.unit,
+    marginLeft: 40,
+    marginTop: 40
 
   },
   text: {
     fontSize: 36,
     margin: 'auto'
   }
- 
+
 
 })
 
@@ -94,9 +96,9 @@ class RoutinePage extends Component {
   checkEdit = () => {
     if (this.props.reduxStore.editMode.edit === true) {
       return (
-        <>
+        <div className='button'>
           <Button
-            className='button'
+
             variant="contained"
             color="primary"
             onClick={(item) => this.updateSubmit(item)}
@@ -104,6 +106,7 @@ class RoutinePage extends Component {
           >
             update
           </Button>
+          <div className='cancelBtn'>
           <Button
             variant="contained"
             color="secondary"
@@ -112,18 +115,21 @@ class RoutinePage extends Component {
           >
             Cancel
           </Button>
-        </>
+          </div>
+        </div>
       )// end return
     } else {
       return (
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={(item) => this.handleSubmit(item)}
-          size='small'
-        >
-          Submit
+        <div className='button'>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={(item) => this.handleSubmit(item)}
+            size='small'
+          >
+            Submit
           </Button>
+        </div>
       )// end return 
     } // end else
   }// end checkEdit
@@ -227,7 +233,7 @@ class RoutinePage extends Component {
 
 
   render() {
-    
+
     const { classes } = this.props;
     return (
       <>

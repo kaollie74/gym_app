@@ -25,7 +25,7 @@ const styles = theme => ({
     marginLeft: 10,
     marginBottom: 15,
     height: 300,
-    backgroundColor: 'gray',
+    backgroundColor: 'rgb(105, 105, 105)',
   },
  
   enter: {
@@ -42,11 +42,17 @@ const styles = theme => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
+  headText: {
+    fontSize: 65,
+    color: 'rgb(211, 211, 211)',
+    textAlign: 'center'
+  },
   title: {
     fontSize: 12,
     textAlign: 'center'
   },
   text: {
+    color: 'rgb(211, 211, 211)',
     textAlign: 'center',
   },
   cardContent: {
@@ -72,13 +78,13 @@ class HomePage extends Component {
     const { classes } = this.props;
     return (
       <div>
-        <Card className={classes.gymFit}>
-          <Typography className={classes.text} variant="h1" component="h2" gutterBottom>
+        {/* <Card className={classes.gymFit}>
+          <Typography className={classes.text} variant="h1" component="h2" gutterBottom> */}
             {/* Welcome,  {this.props.user.username}!
             <br/> */}
-            GymFit
-            </Typography>
-        </Card >
+        <h1 className={classes.headText}>GymFit</h1> 
+            {/* </Typography>
+        </Card > */}
 
         <Grid className={classes.masterGrid} container spacing={24} >
  
@@ -94,7 +100,7 @@ class HomePage extends Component {
               </Typography>
                     <CardMedia
                       className={classes.media}
-                      image="/images/weights.jpg"
+                      image="/images/barbellsolo.jpg"
                       title="Weights"
                     />
                     <Button
@@ -141,14 +147,14 @@ class HomePage extends Component {
                 <Card className={classes.card}>
                   <CardContent className={classes.cardContent}>
                     <Typography
-                      style={{ marginTop: 20, marginLeft: 60 }}
+                     className={classes.text}
                       variant="h5"
                     >
                       Gyms NearBy
             </Typography>
                     <CardMedia
                       className={classes.media}
-                      image="/images/weights.jpg"
+                      image="/images/google_maps.jpg"
                       title="Weights"
                     />
                     <Button
@@ -166,8 +172,8 @@ class HomePage extends Component {
               </Grid>
             </Grid>
           </Grid>
-          <Grid>
-            <Grid item xs={12}>
+          <Grid item xs={6}>
+            <Grid item xs={10} >
             <WeeklyPage />
             </Grid>
           </Grid>

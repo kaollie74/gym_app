@@ -49,7 +49,7 @@ const styles = theme => ({
   },
   deleteButton: {
     marginTop: 0,
-    marginLeft: 950,
+    marginLeft: 990,
   }
 });
 

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import './RoutineNamePage.css';
 
 // Material UI
+import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import EditIcon from '@material-ui/icons/Edit';
@@ -20,7 +21,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   card: {
-    background: 'gray',
+    background: 'rgb(211, 211, 211)',
     margin: 0
   },
   root: {
@@ -48,8 +49,13 @@ const styles = theme => ({
     textAlign: 'center'
   },
   text: {
-    fontSize: 48,
-    textAlign: 'center'
+    fontSize: 56,
+    textAlign: 'center',
+    color: 'rgb(211, 211, 211)'
+  },
+  textField: {
+    margin: theme.spacing.unit,
+    marginLeft: 40
   },
   titleBar: {
     background:
@@ -61,6 +67,36 @@ const styles = theme => ({
   },
 });
 
+const day = [
+  {
+    value: 1,
+    label: 'Monday'
+  },
+  {
+    value: 2,
+    label: 'Tuesday'
+  },
+  {
+    value: 3,
+    label: 'Wednesday'
+  },
+  {
+    value: 4,
+    label: 'Thursday'
+  },
+  {
+    value: 5,
+    label: 'Friday'
+  },
+  {
+    value: 6,
+    label: 'Saturday'
+  },
+  {
+    value: 7,
+    label: 'Sunday'
+  }
+]
 
 class RoutineNamePage extends Component {
 
@@ -84,16 +120,40 @@ class RoutineNamePage extends Component {
   checkEdit = () => {
     if (this.state.edit === false) {
       return (
-        <>
-          <button onClick={(item) => this.handleSubmit(item)}>Submit</button>
-        </>
+        <div className='addRoutineSubmitBtn'>
+          <Button
+            className='handlSubmitBtn'
+            color="primary"
+            onClick={(item) => this.handleSubmit(item)}
+            size="small"
+            variant="contained"
+          >
+            Submit
+          </Button>
+        </div>
       )// end return
     } else {
       return (
-        <>
-          <button onClick={(item) => this.updateSubmit(item)}>update</button>
-          <button onClick={this.handleCancel}>Cancel</button>
-        </>
+        <div className='addRoutineSubmitBtn'>
+          <Button
+            color="primary"
+            onClick={(item) => this.updateSubmit(item)}
+            size="small"
+            variant="contained"
+          >
+            Update
+          </Button>
+          <div className="cancelBtn">
+            <Button
+              color="secondary"
+              onClick={this.handleCancel}
+              size="small"
+              variant="contained"
+            >
+              Cancel
+          </Button>
+          </div>
+        </div>
       )// end return 
     } // end else
   }// end checkEdit
@@ -148,7 +208,7 @@ class RoutineNamePage extends Component {
     console.log('In handleRoutineNameEdit', item);
     this.setState({
       routineName: item.routineName,
-      day: item.day,
+      day: item.day_id,
       id: item.id,
       image: item.image,
       edit: true
@@ -175,42 +235,51 @@ class RoutineNamePage extends Component {
 
     return (
       <>
-        <Card className={classes.card}>
-          <CardContent>
-            <Typography className={classes.text}>
-              Build Routine
-              </Typography>
-          </CardContent>
-        </Card>
+
+        <h1 className={classes.text}>Routines</h1>
 
         <form className="buildRoutineForm">
-          <input type='text' placeholder='Routine Name' value={this.state.routineName} onChange={(event) => this.handleChange(event, 'routineName')} />
-          <input type='text' placeholder='image' value={this.state.image} onChange={(event) => this.handleChange(event, 'image')}/>
-          <select value={this.state.day} onChange={(event) => this.handleChange(event, 'day')} >
-            <option value='default'>Select Day</option>
-            <option value="Monday">Monday</option>
-            <option value="Tuesday">Tuesday</option>
-            <option value="Wednesday">Wednesday</option>
-            <option value="Thursday">Thursday</option>
-            <option value="Friday">Friday</option>
-            <option value="Saturday">Saturday</option>
-            <option value="Sunday">Sunday</option>
-          </select>
-          {/* <button onClick={this.handleSubmit}>Submit</button> */}
+          <h2 className='addRoutine'>Add Routine</h2>
+          <TextField
+            className={classes.textField}
+            id='default'
+            select label='select'
+            margin='normal'
+            value={this.state.day}
+            onChange={(event) => this.handleChange(event, 'day')}
+          >
+            {day.map(option => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </TextField>
+          <TextField
+            className={classes.textField}
+            id='text'
+            label='Routine Name'
+            value={this.state.routineName}
+            onChange={(event) => this.handleChange(event, 'routineName')}
+          />
+          <TextField
+            className={classes.textField}
+            id='text'
+            label='image'
+            value={this.state.image}
+            onChange={(event) => this.handleChange(event, 'image')}
+          />
+
           {this.checkEdit()}
         </form>
-        {/* <Card className={classes.routines}>
-          <CardContent>
-            <Typography className={classes.routineText}>
-              Current Routines
-              </Typography>
-          </CardContent>
-        </Card> */}
+
 
         <GridList cellHeight={200} spacing={5} className={classes.gridList}>
           {this.props.reduxStore.routineNames.map(item => (
             <GridListTile key={item.id} cols={1} rows={1}>
-              <img src={item.image ? item.image : 'images/weights.jpg'} alt='plates' onClick={() => this.handleRoutine(item)} />
+              <img
+                src={item.image ? item.image : 'images/weights.jpg'}
+                alt='plates' onClick={() => this.handleRoutine(item)}
+              />
               <GridListTileBar
                 title={item.routineName}
                 titlePosition='top'

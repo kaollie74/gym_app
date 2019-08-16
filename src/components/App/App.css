@@ -1,8 +1,18 @@
 
 .activityForm {
-    height: 100px;
-    background-color: gray;
-    width: 75%;
+    margin-left: 'auto';
+    height: 150px;
+    background-color: rgb(105, 105, 105,);
+    width: 93%;
+}
+
+.addRoutine {
+    text-align: center;
+}
+
+.addRoutineSubmitBtn {
+    display: inline-block;
+    margin: 23px
 }
 
 .backgroundColor {
@@ -16,18 +26,25 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
-    background-color: #4b3c8a;
+    background-color: rgba(0, 0, 0, 0.89)
 }
 
 .buildRoutineForm {
-    width: 25%;
-    height: 60px;
-    margin-left: 700px
-
+    width: 60%;
+    height: 140px;
+    margin-left: 270px;
+    background-color: rgba(105, 105, 105);
 }
 
 .button{
-    margin: 10px
+    display: inline-block;
+    margin: 55px;
+    margin-left: 15px
+}
+
+.cancelBtn {
+    display: inline-block;
+    margin-left: 10px;
 }
 
 .alert {
@@ -37,17 +54,23 @@ body {
 
 .loginForm {
     width: 25%;
-    height: 200px;
+    height: 10%;
     background-color: 'green';
+    margin-left: 425px;
+
 }
 
 form {
     background-color: #777777;
     width: 50%;
     height: 250px;
-    margin: 20px auto;
-    padding: 25px;
+    margin: 20px;
+    padding-top: 1px;
     border-radius: 2px;
+}
+
+.handleSubmitBtn {
+    padding-top: 100px
 }
 
 input {
@@ -72,7 +95,7 @@ input {
 /* This line makes the "Register" and "Login" buttons look like links */
 .link-button {
     background:none;
-    color:inherit;
+    color:rgba(245, 245, 245, 0.788);
     border:none;
     padding:0;
     font: inherit;

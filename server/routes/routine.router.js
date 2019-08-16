@@ -10,7 +10,7 @@ router.post('/name', (req,res)=> {
   console.log('req.user.id', req.user.id);
   console.log('req.body', req.body)
   
-  const sqlText = `INSERT INTO "routine" ("routineName", "day", "user_id", "image")
+  const sqlText = `INSERT INTO "routine" ("routineName", "day_id", "user_id", "image")
                     Values($1, $2, $3, $4);`
   values = [req.body.routineName, req.body.day, req.user.id, req.body.image]
   pool.query(sqlText, values)
@@ -25,6 +25,8 @@ router.post('/name', (req,res)=> {
 
 })
 
+// when the checkbox on the table is checked/unchecked this runs
+// to change 'completed' to false or true
 router.put('/update/:id', (req,res)=> {
   console.log('req.body', req.body);
   console.log('req.params',req.params)
@@ -45,7 +47,7 @@ router.put('/update/:id', (req,res)=> {
 router.put('/modify/:id', (req,res)=> {
   console.log('req.params', req.params)
   console.log('req.body', req.body)
-  const sqlText = `UPDATE "routine" SET "routineName"=$1, "day"=$2, "image"=$3 WHERE "id"=$4;`;
+  const sqlText = `UPDATE "routine" SET "routineName"=$1, "day_id"=$2, "image"=$3 WHERE "id"=$4;`;
   values = [req.body.routineName, req.body.day, req.body.image, req.params.id];
   pool.query(sqlText, values)
   .then((response)=> {
@@ -62,11 +64,15 @@ router.put('/modify/:id', (req,res)=> {
 // GET all "routine_names" and "days" from "routine" table
 router.get('/name', (req,res)=> {
   console.log(req.body.id);
-  const sqlText = `SELECT * FROM "routine" WHERE "user_id"=$1 ORDER BY "id";`;
+  // const sqlText = `SELECT * FROM "routine" WHERE "user_id"=$1 ORDER BY "id";`;
+  const sqlText = `SELECT "routine"."id", "routineName", "user_id", "day_id", "image", "completed", "day" FROM "routine"
+                    JOIN "day" on "day_id" = "day"."id"
+                    WHERE "user_id"=$1
+                    ORDER BY "day"."id";`;
   
   pool.query(sqlText, [req.user.id])
   .then((response)=> {
-    
+    console.log(response.rows)
     res.send(response.rows)
   })
   .catch((error)=> {
