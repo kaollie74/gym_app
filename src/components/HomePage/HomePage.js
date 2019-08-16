@@ -27,7 +27,7 @@ const styles = theme => ({
     height: 300,
     backgroundColor: 'rgb(105, 105, 105)',
   },
- 
+
   enter: {
     marginTop: 20,
     marginLeft: 100
@@ -65,7 +65,7 @@ const styles = theme => ({
   media: {
     height: 160,
   },
- 
+
 
 })
 
@@ -80,24 +80,24 @@ class HomePage extends Component {
       <div>
         {/* <Card className={classes.gymFit}>
           <Typography className={classes.text} variant="h1" component="h2" gutterBottom> */}
-            {/* Welcome,  {this.props.user.username}!
+        {/* Welcome,  {this.props.user.username}!
             <br/> */}
-        <h1 className={classes.headText}>GymFit</h1> 
-            {/* </Typography>
+        <h1 className={classes.headText}>GymFit</h1>
+        {/* </Typography>
         </Card > */}
 
         <Grid className={classes.masterGrid} container spacing={24} >
- 
+
           <Grid item xs={6}>
             <Grid className={classes.cardContainer} container spacing={12}>
               <Grid item xs={6}>
-                <Card className={classes.card} >
+                <Card  img src="/images/barbellsolo.jpg" className={classes.card}>
                   <CardContent className={classes.cardContent} >
                     <Typography
                       className={classes.text} variant="h5"
                     >
                       Build Your Routine
-              </Typography>
+                    </Typography>
                     <CardMedia
                       className={classes.media}
                       image="/images/barbellsolo.jpg"
@@ -123,7 +123,7 @@ class HomePage extends Component {
                   <CardContent className={classes.cardContent}>
                     <Typography className={classes.text} variant="h5"
                     >
-                      Weekly Routine
+                      Articles
               </Typography>
                     <CardMedia
                       className={classes.media}
@@ -147,7 +147,7 @@ class HomePage extends Component {
                 <Card className={classes.card}>
                   <CardContent className={classes.cardContent}>
                     <Typography
-                     className={classes.text}
+                      className={classes.text}
                       variant="h5"
                     >
                       Gyms NearBy
@@ -174,7 +174,7 @@ class HomePage extends Component {
           </Grid>
           <Grid item xs={6}>
             <Grid item xs={10} >
-            <WeeklyPage />
+              <WeeklyPage />
             </Grid>
           </Grid>
           {/* <div>

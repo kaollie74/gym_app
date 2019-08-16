@@ -16,6 +16,7 @@ import HomePage from '../HomePage/HomePage';
 import WeeklyPage from '../WeeklyPage/WeeklyPage';
 import RoutineNamePage from '../RoutineNamePage/RoutineNamePage';
 import RoutinePage from '../RoutinePage/RoutinePage';
+import GymNearMe from '../GymNearMe/GymNearMe';
 
 import './App.css';
 
@@ -36,8 +37,8 @@ class App extends Component {
             This is a route anyone can see, no login necessary */}
             <ProtectedRoute
               exact
-              path="/database"
-              component={RoutineDatabasePage}
+              path="/gym-near-me"
+              component={GymNearMe}
             />
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.

@@ -17,6 +17,9 @@ const styles = theme => ({
     margin: 'auto',
     width: 300
   },
+  color: {
+    color: 'rgb(220,220, 220)'
+  },
   textField: {
     margin: theme.spacing.unit,
     marginLeft: 40,
@@ -24,11 +27,11 @@ const styles = theme => ({
 
   },
   text: {
-    fontSize: 36,
-    margin: 'auto'
+    fontSize: 46,
+    marginTop: 50,
+    marginLeft: 420,
+    color: 'rgb(220, 220, 220)'
   }
-
-
 })
 
 // Array of objects for the drop down
@@ -107,13 +110,13 @@ class RoutinePage extends Component {
             update
           </Button>
           <div className='cancelBtn'>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={this.handleCancel}
-            size="small"
-          >
-            Cancel
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={this.handleCancel}
+              size="small"
+            >
+              Cancel
           </Button>
           </div>
         </div>
@@ -245,6 +248,7 @@ class RoutinePage extends Component {
             value={this.state.body_part}
             onChange={(event) => this.handleChange(event, 'body_part')}
             margin='normal'
+            InputProps={{ classes: { input: classes.color } }}
           >
             {bodyPart.map(option => (
               <option key={option.value} value={option.value}>
@@ -259,6 +263,7 @@ class RoutinePage extends Component {
             margin='normal'
             value={this.state.exercise}
             onChange={(event) => this.handleChange(event, 'exercise')}
+            InputProps={{ classes: { input: classes.color } }}
           />
           <TextField
             className={classes.textField}
@@ -267,6 +272,7 @@ class RoutinePage extends Component {
             margin='normal'
             value={this.state.sets}
             onChange={(event) => this.handleChange(event, 'sets')}
+            InputProps={{ classes: { input: classes.color } }}
           />
           <TextField
             className={classes.textField}
@@ -275,6 +281,7 @@ class RoutinePage extends Component {
             margin='normal'
             value={this.state.reps}
             onChange={(event) => this.handleChange(event, 'reps')}
+            InputProps={{ classes: { input: classes.color } }}
           />
           <TextField
             className={classes.textField}
@@ -283,20 +290,18 @@ class RoutinePage extends Component {
             margin='normal'
             value={this.state.comments}
             onChange={(event) => this.handleChange(event, 'comments')}
+            InputProps={{ classes: { input: classes.color } }}
           />
           {this.checkEdit()}
           {/* <button onClick={(item)=>this.handleSubmit(item)}>Submit</button> */}
         </form>
 
-        <Card className={classes.card}>
-          <CardContent>
-            <Typography className={classes.text}>
-              {this.props.reduxStore.routineSingle.routineName}
-              -
-              {this.props.reduxStore.routineSingle.day}
-            </Typography>
-          </CardContent>
-        </Card>
+        <div>
+          <Typography className={classes.text}>
+            {this.props.reduxStore.routineSingle.routineName}
+          
+          </Typography>
+        </div>
 
         <RoutineActivitiesList updateState={this.updateState} />
 

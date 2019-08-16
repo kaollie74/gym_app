@@ -151,8 +151,6 @@ class RoutineActivitiesList extends Component {
       return (
         <>
           <Button
-            // component={Link}
-            // to='/name'
             variant="contained"
             color="secondary"
             className={classes.deleteButton}

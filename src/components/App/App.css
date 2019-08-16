@@ -1,13 +1,14 @@
 
 .activityForm {
-    margin-left: 'auto';
+    margin: 'auto';
     height: 150px;
     background-color: rgb(105, 105, 105,);
-    width: 93%;
+    width: 100%;
 }
 
 .addRoutine {
     text-align: center;
+    color: rgb(220,220,220)
 }
 
 .addRoutineSubmitBtn {
@@ -30,7 +31,7 @@ body {
 }
 
 .buildRoutineForm {
-    width: 60%;
+    width: 62%;
     height: 140px;
     margin-left: 270px;
     background-color: rgba(105, 105, 105);
@@ -52,6 +53,10 @@ body {
     margin: 50px;
 }
 
+.label {
+    color: 'white';
+}
+
 .loginForm {
     width: 25%;
     height: 10%;
@@ -66,7 +71,7 @@ form {
     height: 250px;
     margin: 20px;
     padding-top: 1px;
-    border-radius: 2px;
+    /* border-radius: 2px; */
 }
 
 .handleSubmitBtn {

@@ -14,6 +14,7 @@ import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 import { Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import FormControl from '@material-ui/core/FormControl';
 
 
 
@@ -24,6 +25,9 @@ const styles = theme => ({
     background: 'rgb(211, 211, 211)',
     margin: 0
   },
+  color: {
+    color: 'rgb(220,220, 220)'
+  },
   root: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -31,6 +35,7 @@ const styles = theme => ({
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
     margin: 'auto'
+
   },
   gridList: {
     width: 1000,
@@ -55,7 +60,8 @@ const styles = theme => ({
   },
   textField: {
     margin: theme.spacing.unit,
-    marginLeft: 40
+    marginLeft: 40,
+    color: 'white',
   },
   titleBar: {
     background:
@@ -122,7 +128,7 @@ class RoutineNamePage extends Component {
       return (
         <div className='addRoutineSubmitBtn'>
           <Button
-            className='handlSubmitBtn'
+            className='handleSubmitBtn'
             color="primary"
             onClick={(item) => this.handleSubmit(item)}
             size="small"
@@ -241,12 +247,14 @@ class RoutineNamePage extends Component {
         <form className="buildRoutineForm">
           <h2 className='addRoutine'>Add Routine</h2>
           <TextField
+
             className={classes.textField}
             id='default'
             select label='select'
             margin='normal'
             value={this.state.day}
             onChange={(event) => this.handleChange(event, 'day')}
+            InputProps={{ classes: { input: classes.color } }}
           >
             {day.map(option => (
               <option key={option.value} value={option.value}>
@@ -260,6 +268,7 @@ class RoutineNamePage extends Component {
             label='Routine Name'
             value={this.state.routineName}
             onChange={(event) => this.handleChange(event, 'routineName')}
+            InputProps={{ classes: { input: classes.color } }}
           />
           <TextField
             className={classes.textField}
@@ -267,6 +276,7 @@ class RoutineNamePage extends Component {
             label='image'
             value={this.state.image}
             onChange={(event) => this.handleChange(event, 'image')}
+            InputProps={{ classes: { input: classes.color } }}
           />
 
           {this.checkEdit()}
