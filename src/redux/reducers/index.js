@@ -7,6 +7,7 @@ import routineSingle from './RoutineSingleName';
 import activities from './ActivitiesReducer';
 import editMode from './EditModeReducer';
 import imagesReduce from './ImagesReducer';
+import gymsNearMe from './GymsNearMeReducer';
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
   routineSingle,
   activities,
   editMode,
-  imagesReduce
+  imagesReduce,
+  gymsNearMe
 });
 
 export default rootReducer;

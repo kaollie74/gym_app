@@ -13,6 +13,7 @@ const userRouter = require('./routes/user.router');
 const routineRouter = require('./routes/routine.router');
 const activityRouter = require('./routes/activity.router');
 const imagesRouter = require('./routes/images.router');
+const gymsRouter = require('./routes/gyms.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -30,6 +31,7 @@ app.use('/api/user', userRouter);
 app.use('/routine', routineRouter)
 app.use('/activity', activityRouter) 
 app.use('/api/images', imagesRouter)
+app.use('/api/gyms-near-me', gymsRouter)
 
 // Serve static files
 app.use(express.static('build'));

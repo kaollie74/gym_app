@@ -7,6 +7,7 @@ import ActivitySaga from './ActivitySaga';
 import DeleteRoutine from './DeleteRoutineNameSage';
 import UpdateRoutineName from './UpdateRoutineNameSaga';
 import FetchImagesSaga from './FetchImagesSaga';
+import GymsNearMeSaga from './GymsNearMeSaga';
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
 // This is imported in index.js as rootSaga
@@ -24,6 +25,7 @@ export default function* rootSaga() {
     DeleteRoutine(),
     UpdateRoutineName (),
     FetchImagesSaga(),
+    GymsNearMeSaga(),
 
   ]);
 }
