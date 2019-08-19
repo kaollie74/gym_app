@@ -18,6 +18,9 @@ import Swal from 'sweetalert2';
 import {withRouter} from 'react-router-dom';
 
 const styles = theme => ({
+  customClass: {
+
+  },
   root: {
     width: '80%',
     margin: 'auto',
@@ -95,8 +98,11 @@ class RoutineActivitiesList extends Component {
   // Function will Remove entire routine from the Database
   // by capture the values and running a dispatch
   handleRoutineDelete = () => {
+    const { classes } = this.props;
+
     const swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
+
+      customClass: { 
         confirmButton: 'btn btn-success',
         cancelButton: 'btn btn-danger'
       },

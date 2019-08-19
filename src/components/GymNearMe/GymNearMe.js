@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
+import CurrentLocation from '../Map/Map';
 
 import PlacesAutocomplete, { geocodeByAddress, geocodeByPlaceId, getLatLng, } from 'react-places-autocomplete';
 require('dotenv').config();
@@ -47,28 +48,43 @@ class GymNearMe extends Component {
   }
 
   displayMarkers = () => {
+
+    // return(<Marker onClick={this.clickedMe} name={'Play'} />)
     return (
-      this.props.reduxStore.gymsNearMe.map((item, i) => {
+      this.props.reduxStore.gymsNearMe.map((item, index) => {
 
         return <Marker
-          key={i}
-          id={i}
+
+          key={index}
+          id={index}
           position={{ lat: item.geometry.location.lat, lng: item.geometry.location.lng }}
-          onClick={() => this.clickedMe(item)}
+          //img={'image' + <img src={item.icon}/>}
+          name={'Place: ' + item.name}
+          rating={'Rating: ' + item.rating}
+          address={'Address: ' + item.formatted_address}
+          onClick={this.clickedMe}
+          //button={<button onClick={ (event) => this.blah(item, event)}>Hello</button>}
+
         />
 
       })
     )
   }
 
+  blah = (item, event) => {
+    console.log('in blah')
+  }// end blah
 
 
-  clickedMe = (item, marker) => {
-    console.log('item is', item)
 
+  clickedMe = (props, id, event) => {
+
+    console.log('item is', props)
+    console.log('this is marker', id)
     this.setState({
-      selectedPlace: item,
-      activeMarker: marker
+      selectedPlace: props,
+      activeMarker: id,
+      showingInfoWindow: true
     })
   }
 
@@ -84,29 +100,37 @@ class GymNearMe extends Component {
   }
 
   render() {
-
+    console.log('this.state', this.state)
     return (
 
 
       <div>
         <div>
-          <Map
+          <CurrentLocation centerAroundCurrentLocation
             google={this.props.google}
-            zoom={8}
+            zoom={14}
             style={mapStyles}
-            initialCenter={{ lat: 44.986656, lng: -93.258133 }}
+          //initialCenter={{ lat: 44.986656, lng: -93.258133 }}
           >
             {this.displayMarkers()}
-            {/* <InfoWindow
+            <InfoWindow
               marker={this.state.activeMarker}
               visible={this.state.showingInfoWindow}
               onClose={this.onClose}
             >
-              <div><h4>{this.state.selectedPlace}</h4></div>
-            </InfoWindow> */}
-          </Map>
+              <div>
+                <h4>{this.state.selectedPlace.img}</h4>
+                <h4>{this.state.selectedPlace.name}</h4>
+                <h4>{this.state.selectedPlace.rating}</h4>
+                <h4>{this.state.selectedPlace.address}</h4>
+                <h4>{this.state.selectedPlace.button}</h4>
+              </div>
+            </InfoWindow>
+          </CurrentLocation>
+
         </div>
-        <div>
+
+        {/* <div>
           <br />
           <br />
           <br />
@@ -138,7 +162,7 @@ class GymNearMe extends Component {
               <h2>Address: </h2>{item.formatted_address}
               <br />
               <h2>Image:</h2> {JSON.stringify((item.photos ? item.photos[0].height : item.photo))}
-              <img src={item.photos ? item.photos[0].height : item.photo} />
+              <img src={item.photos ? item.photos[0].formatted_address : item.photo} />
               <br />
               <h2>Hours: </h2>
               <h2>Ratings: {item.user_ratings_total}</h2>
@@ -148,9 +172,9 @@ class GymNearMe extends Component {
 
           )
           )
-        }
+        } */}
 
-      </div>
+      </div >
 
     )
   }
@@ -160,4 +184,4 @@ const mapStateToProps = reduxStore => ({
   reduxStore
 });
 
-export default GoogleApiWrapper({ apiKey: 'AIzaSyDmyWdxkXB_xVVFFpUVwp3xye2HCUrLv-Q' })(connect(mapStateToProps)(GymNearMe));
+export default GoogleApiWrapper({ apiKey: 'API_KEY' })(connect(mapStateToProps)(GymNearMe));

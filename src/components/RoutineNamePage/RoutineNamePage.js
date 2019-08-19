@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+ import { connect } from 'react-redux';
 import './RoutineNamePage.css';
 
 // Material UI
@@ -186,7 +186,6 @@ class RoutineNamePage extends Component {
       routineName: '',
       day: '',
       image: ''
-
     })
   } // end handleSubmit
 
@@ -235,6 +234,16 @@ class RoutineNamePage extends Component {
     })
   }
 
+  autoPopulate = () => {
+    this.setState({
+      routineName: 'BodyWeight Lower',
+      day: 5,
+      image: 'https://image.shutterstock.com/image-vector/one-hour-workout-4-percent-260nw-633982997.jpg',
+      edit: false
+    })
+  }
+
+ 
   render() {
     const { classes } = this.props;
     console.log('this.state', this.state)
@@ -242,9 +251,9 @@ class RoutineNamePage extends Component {
     return (
       <>
 
-        <h1 className={classes.text}>Routines</h1>
+        <h1 className={classes.text} onClick={this.autoPopulate}>Routines</h1>
 
-        <form className="buildRoutineForm">
+        <form className="buildRoutineForm" >
           <h2 className='addRoutine'>Add Routine</h2>
           <TextField
 

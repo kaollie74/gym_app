@@ -232,10 +232,64 @@ class RoutinePage extends Component {
     })
   } // end handleChange
 
+  populateActivity = () => {
+    if(this.props.reduxStore.activities.length === 0){
+    this.setState({
+      routine_id: this.props.reduxStore.routineSingle.id,
+      body_part: 'Legs',
+      exercise: 'BB Squat',
+      sets: '3',
+      reps: '10',
+      comments: '315 lbs'
+
+    })
+    } else if (this.props.reduxStore.activities.length === 1){
+      this.setState({
+        routine_id: this.props.reduxStore.routineSingle.id,
+        body_part: 'Legs',
+        exercise: 'DeadLift',
+        sets: '4',
+        reps: '8',
+        comments: '415 lbs'
+
+      })
+    } else if (this.props.reduxStore.activities.length === 2){
+      this.setState({
+        routine_id: this.props.reduxStore.routineSingle.id,
+        body_part: 'Legs',
+        exercise: 'Pistol Squats',
+        sets: '2',
+        reps: '10',
+        comments: 'Bodyweight'
+    })
+  } else if (this.props.reduxStore.activities.length === 3){
+      this.setState({
+        routine_id: this.props.reduxStore.routineSingle.id,
+        body_part: 'Legs',
+        exercise: 'Bodyweight Squats',
+        sets: '2',
+        reps: '30',
+        comments: 'Bodyweight'
+      })
+  }
+    else if (this.props.reduxStore.activities.length === 4) {
+      this.setState({
+        routine_id: this.props.reduxStore.routineSingle.id,
+        body_part: 'Legs',
+        exercise: 'Wall sits',
+        sets: '2',
+        reps: '1',
+        comments: 'Hold for 1 minute'
+      })
+    }
+
+} // end populateActivity
+
 
 
 
   render() {
+    console.log('this is state', this.state)
 
     const { classes } = this.props;
     return (
@@ -297,7 +351,7 @@ class RoutinePage extends Component {
         </form>
 
         <div>
-          <Typography className={classes.text}>
+          <Typography className={classes.text} onClick={this.populateActivity}>
             {this.props.reduxStore.routineSingle.routineName}
           
           </Typography>

@@ -159,7 +159,7 @@ class HomePage extends Component {
                     />
                     <Button
                       component={Link}
-                      to='/database'
+                      to='/gym-near-me'
                       className={classes.enter}
                       color="primary"
                       onClick={this.routineDatabase}
