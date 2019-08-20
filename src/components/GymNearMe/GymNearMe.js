@@ -7,8 +7,8 @@ import PlacesAutocomplete, { geocodeByAddress, geocodeByPlaceId, getLatLng, } fr
 require('dotenv').config();
 
 const mapStyles = {
-  width: '50%',
-  height: '50%',
+  width: '80%',
+  height: '80%',
 };
 
 class GymNearMe extends Component {
@@ -184,4 +184,4 @@ const mapStateToProps = reduxStore => ({
   reduxStore
 });
 
-export default GoogleApiWrapper({ apiKey: 'API_KEY' })(connect(mapStateToProps)(GymNearMe));
+export default GoogleApiWrapper({ apiKey: 'API_KEY_GOES_HERE' })(connect(mapStateToProps)(GymNearMe));

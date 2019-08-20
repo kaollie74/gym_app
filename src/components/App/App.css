@@ -2,7 +2,8 @@
 .activityForm {
     margin: 'auto';
     height: 150px;
-    background-color: rgb(105, 105, 105,);
+    background-color: rgb(141, 138, 138);
+    
     width: 100%;
 }
 
@@ -27,14 +28,14 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
-    background-color: rgba(0, 0, 0, 0.89)
+    background-color: rgba(0, 0, 0, 0.87)
 }
 
 .buildRoutineForm {
     width: 62%;
     height: 140px;
     margin-left: 270px;
-    background-color: rgba(105, 105, 105);
+    background-color: rgb(141, 138, 138);
 }
 
 .button{

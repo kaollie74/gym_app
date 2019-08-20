@@ -236,7 +236,7 @@ class RoutineNamePage extends Component {
 
   autoPopulate = () => {
     this.setState({
-      routineName: 'BodyWeight Lower',
+      routineName: 'Legs',
       day: 5,
       image: 'https://image.shutterstock.com/image-vector/one-hour-workout-4-percent-260nw-633982997.jpg',
       edit: false
@@ -301,7 +301,7 @@ class RoutineNamePage extends Component {
               />
               <GridListTileBar
                 title={item.routineName}
-                titlePosition='top'
+                titlePosition='center'
                 actionIcon={
                   <IconButton className={classes.icon}>
                     <EditIcon onClick={() => this.handleRoutineNameEdit(item)} />

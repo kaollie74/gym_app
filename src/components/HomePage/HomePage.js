@@ -64,6 +64,7 @@ const styles = theme => ({
 
   media: {
     height: 160,
+    borderRadius: '8px',
   },
 
 

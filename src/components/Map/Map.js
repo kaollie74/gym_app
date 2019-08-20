@@ -5,10 +5,10 @@ const mapStyles = {
   map: {
     position: 'absolute',
     top: '120px',
-    left: '350px',
+    left: '200px',
     right: 'auto',
-    width: '50%',
-    height: '50%',
+    width: '70%',
+    height: '70%',
     
   }
 };
