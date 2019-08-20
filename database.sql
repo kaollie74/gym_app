@@ -24,11 +24,13 @@ CREATE TABLE "activity" (
 );
 
 
+-- For the Day Table, it must be pre-filled in Monday - Sunday
+-- Where Monday will be "id" '1' all the way where 'Sunday being "id" '7'
+-- You can find the query below.
 CREATE TABLE "day" (
 "id" SERIAL PRIMARY KEY,
 "day" varchar(25)
 );
-
 
 CREATE TABLE "routine" (
    "id" SERIAL PRIMARY KEY,
@@ -38,3 +40,20 @@ CREATE TABLE "routine" (
    "image" varchar(255),
    "completed" BOOLEAN DEFAULT 'false'
 );
+
+-- Insert these values in the "day" table before running the APP
+-- Enter them in this order.
+INSERT INTO "day" ("day")
+Values('Monday');
+INSERT INTO "day" ("day")
+Values('Tuesday');
+INSERT INTO "day" ("day")
+Values('Wednesday');
+INSERT INTO "day" ("day")
+Values('Thursday');
+INSERT INTO "day" ("day")
+Values('Friday');
+INSERT INTO "day" ("day")
+Values('Saturday');
+INSERT INTO "day" ("day")
+Values('Sunday');
