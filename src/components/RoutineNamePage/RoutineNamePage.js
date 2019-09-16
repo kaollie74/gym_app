@@ -296,7 +296,7 @@ class RoutineNamePage extends Component {
           {this.props.reduxStore.routineNames.map(item => (
             <GridListTile key={item.id} cols={1} rows={1}>
               <img
-                src={item.image ? item.image : 'images/weights.jpg'}
+                src= {item.image ? item.image : 'images/weights.jpg'}
                 alt='plates' onClick={() => this.handleRoutine(item)}
               />
               <GridListTileBar

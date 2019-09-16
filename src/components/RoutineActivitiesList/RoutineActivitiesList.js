@@ -86,6 +86,7 @@ class RoutineActivitiesList extends Component {
       edit: true,
     }
     this.props.dispatch({ type: 'EDIT_MODE', payload: routinePass })
+    
     this.props.updateState(item);
   } // end editActivity
 

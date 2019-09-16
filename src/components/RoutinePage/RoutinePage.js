@@ -232,6 +232,7 @@ class RoutinePage extends Component {
     })
   } // end handleChange
 
+  
   populateActivity = () => {
     if(this.props.reduxStore.activities.length === 0){
     this.setState({

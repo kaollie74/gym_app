@@ -184,4 +184,4 @@ const mapStateToProps = reduxStore => ({
   reduxStore
 });
 
-export default GoogleApiWrapper({ apiKey: 'API_KEY_GOES_HERE' })(connect(mapStateToProps)(GymNearMe));
+export default GoogleApiWrapper({ apiKey: 'AIzaSyDmyWdxkXB_xVVFFpUVwp3xye2HCUrLv-Q' })(connect(mapStateToProps)(GymNearMe));

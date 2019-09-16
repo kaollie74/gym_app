@@ -1,11 +1,12 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 
 // This POST will post ROUTINE NAME and the DAY
 // in the Routine Table
-router.post('/name', (req,res)=> {
+router.post('/name', rejectUnauthenticated, (req,res)=> {
 
   console.log('req.user.id', req.user.id);
   console.log('req.body', req.body)
@@ -27,7 +28,7 @@ router.post('/name', (req,res)=> {
 
 // when the checkbox on the table is checked/unchecked this runs
 // to change 'completed' to false or true
-router.put('/update/:id', (req,res)=> {
+router.put('/update/:id', rejectUnauthenticated, (req,res)=> {
   console.log('req.body', req.body);
   console.log('req.params',req.params)
   const sqlText = `UPDATE "routine" SET "completed"=$1 WHERE "id"=$2;`;
@@ -44,7 +45,7 @@ router.put('/update/:id', (req,res)=> {
   
 })
 
-router.put('/modify/:id', (req,res)=> {
+router.put('/modify/:id', rejectUnauthenticated, (req,res)=> {
   console.log('req.params', req.params)
   console.log('req.body', req.body)
   const sqlText = `UPDATE "routine" SET "routineName"=$1, "day_id"=$2, "image"=$3 WHERE "id"=$4;`;
@@ -62,7 +63,7 @@ router.put('/modify/:id', (req,res)=> {
 
 
 // GET all "routine_names" and "days" from "routine" table
-router.get('/name', (req,res)=> {
+router.get('/name', rejectUnauthenticated, (req,res)=> {
   console.log(req.body.id);
   // const sqlText = `SELECT * FROM "routine" WHERE "user_id"=$1 ORDER BY "id";`;
   const sqlText = `SELECT "routine"."id", "routineName", "user_id", "day_id", "image", "completed", "day" FROM "routine"
@@ -83,7 +84,7 @@ router.get('/name', (req,res)=> {
 })
 
 // GET single routine from 'routine' table by selecting its 'id'
-router.get('/name/:id', (req, res) => {
+router.get('/name/:id', rejectUnauthenticated, (req, res) => {
   console.log(req.body.id);
   const sqlText = `SELECT * FROM "routine" WHERE "id"= $1;`;
   value = [req.params.id]
@@ -100,7 +101,7 @@ router.get('/name/:id', (req, res) => {
     })
 })
 
-router.delete('/delete/:id', (req, res)=> {
+router.delete('/delete/:id', rejectUnauthenticated, (req, res)=> {
   console.log('in /routine/delete/id, req.params.id is:', req.params.id)
   const sqlText = `DELETE FROM "activity" WHERE "routine_id" = $1;`;
   const sqlTextTwo = `DELETE FROM "routine" WHERE "id" = $1;`;

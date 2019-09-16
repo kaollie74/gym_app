@@ -3,6 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const axios = require('axios')
 require('dotenv').config();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 
