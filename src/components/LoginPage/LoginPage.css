@@ -1,0 +1,55 @@
+
+h1 {
+  text-align: center;
+}
+
+.loginImage {
+  margin-top: 2vh;
+  margin-left: 3vh;
+  width: 90%;
+}
+
+.loginForm {
+  
+    width: 60%;
+    height: 10%;
+    background-color: 'green';
+    margin-left: 13vh;
+}
+
+.log-in {
+  margin-left: 10vh;
+}
+
+@media only screen and (min-width: 1000px) {
+
+  h1 {
+    text-align: center;
+  }
+  
+  .loginImage {
+    margin-top: 4vh;
+    margin-left: 40vh;
+    width: 50%;
+  }
+  
+  .loginForm {
+    
+      width: 25%;
+      height: 10%;
+      background-color: 'green';
+      margin-left: 35%;
+  }
+  
+  .log-in {
+    margin-left: 15vh;
+  }
+
+  .password {
+    margin-left: 3vh;
+  }
+
+  .userName {
+    margin-left: 3vh;
+  }
+}

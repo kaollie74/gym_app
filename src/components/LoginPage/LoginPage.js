@@ -5,6 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import CardMedia from '@material-ui/core/CardMedia';
 import { withStyles } from '@material-ui/core/styles';
+import './LoginPage.css';
 
 const styles = theme => ({
   card: {
@@ -60,49 +61,52 @@ class LoginPage extends Component {
             {this.props.errors.loginMessage}
           </h2>
         )}
-
-        <Card className={classes.card}>
+        <div>
+          <Card className='loginImage'>
             <CardMedia
               className={classes.media}
               image="/images/weights.jpg"
               title="Weights"
-              width= '200px'
-              height= '100px'
+              width='200px'
+              height='100px'
             />
-        </Card>
-        <form className="loginForm"onSubmit={this.login}>
-          <h1>Login</h1>
-          <div>
-            <label htmlFor="username">
-              Username:
+          </Card>
+        </div>
+        <div>
+          <form className="loginForm" onSubmit={this.login}>
+            <h1>Login</h1>
+            <div className='userName'>
+              <label htmlFor="username">
+                Username:
               <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="password">
-              Password:
+                  type="text"
+                  name="username"
+                  value={this.state.username}
+                  onChange={this.handleInputChangeFor('username')}
+                />
+              </label>
+            </div>
+            <div className='password'>
+              <label htmlFor="password">
+                Password:
               <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}
+                  type="password"
+                  name="password"
+                  value={this.state.password}
+                  onChange={this.handleInputChangeFor('password')}
+                />
+              </label>
+            </div>
+            <div>
+              <input
+                className="log-in"
+                type="submit"
+                name="submit"
+                value="Log In"
               />
-            </label>
-          </div>
-          <div>
-            <input
-              className="log-in"
-              type="submit"
-              name="submit"
-              value="Log In"
-            />
-          </div>
-        </form>
+            </div>
+          </form>
+        </div>
         <center>
           <button
             type="button"
