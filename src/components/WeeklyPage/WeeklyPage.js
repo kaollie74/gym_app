@@ -52,10 +52,15 @@ class WeeklyPage extends Component {
     completed: false,
   }
 
+  // fetch all the routines that exist in the DB.
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_ROUTINE_NAMES' })
   }
 
+  // When the checkbox is clicked, this function is activated.
+  // First, a condition is run to toggle the checkbox back and forth.
+  // Then a new object is created with the 3 properties used to update
+  // the DB. Then a dispatch runs with 'checked' as the payload.
   handleCheck = (event, item) => {
 
     if (item.completed === false) {
@@ -70,10 +75,13 @@ class WeeklyPage extends Component {
       id: item.id
     }
     console.log('Checked', checked)
-    //console.log('this is state', this.state)
+   
     this.props.dispatch({ type: 'UPDATE_ROUTINE_CHECKBOX', payload: checked })
   }// end handleCheck
 
+  // When the user clicks the 'See Routine' button, this function is activated.
+  // it will run a dispatch to catch this specific routine by sending a payload
+  // with that specific routines 'id'.
   handleRoutine = (item) => {
     console.log('In handleRoutine', item);
     this.props.dispatch({ type: 'RETRIEVE_SINGLE_ROUTINE', payload: item.id });
@@ -106,7 +114,7 @@ class WeeklyPage extends Component {
                 {this.props.reduxStore.routineNames.map(item => (
                   <TableRow
                     key={item.id}
-                  // className={item.completed ? 'backgroundColor' : ''}
+                   //className={item.completed ? 'backgroundColor' : ''}
                   >
                     <Checkbox
                       type="checkbox"
