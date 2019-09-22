@@ -92,8 +92,14 @@ class HomePage extends Component {
           <Grid item xs={6}>
             <Grid className={classes.cardContainer} container spacing={12}>
               <Grid item xs={6}>
-                <Card  img src="/images/barbellsolo.jpg" className={classes.card}>
-                  <CardContent className={classes.cardContent} >
+                <Card
+                  img src="/images/barbellsolo.jpg"
+                  className={classes.card}
+                  // className = 'buildRoutineCard'
+                >
+                  <CardContent
+                    className={classes.cardContent}
+                  >
                     <Typography
                       className={classes.text} variant="h5"
                     >
