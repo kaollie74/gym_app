@@ -9,6 +9,10 @@
 .nav {
   overflow: hidden;
   background-color:rgba(6, 117, 102, 0.801);
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 .nav-link {
