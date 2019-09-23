@@ -7,6 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import { Typography } from '@material-ui/core';
 import CardContent from '@material-ui/core/CardContent';
+import './RoutinePage.css';
 
 
 const styles = theme => ({

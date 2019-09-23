@@ -28,3 +28,8 @@
     - [Google Maps Platform](https://cloud.google.com/maps-platform/)
 
 ## Screen Shots
+![Login-Page](public/images/login-page.jpg)
+![Home-Page](public/images/home-page.jpg)
+![Build-Routine-Page](public/images/build-routine.jpg)
+![Routine-Page](public/images/routine-page.jpg)
+![Gyms-Nearme](public/images/gyms-nearme.jpg)
