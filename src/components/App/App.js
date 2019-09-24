@@ -11,12 +11,14 @@ import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 // Component Routes 
+import Articles from '../Articles/Articles';
 import RoutineDatabasePage from '../RoutineDatabasePage/RoutineDatabasePage';
 import HomePage from '../HomePage/HomePage';
 import WeeklyPage from '../WeeklyPage/WeeklyPage';
 import RoutineNamePage from '../RoutineNamePage/RoutineNamePage';
 import RoutinePage from '../RoutinePage/RoutinePage';
 import GymNearMe from '../GymNearMe/GymNearMe';
+
 
 import './App.css';
 
@@ -56,6 +58,12 @@ class App extends Component {
               path="/weekly"
               component={WeeklyPage}
             />
+            <ProtectedRoute
+              exact
+              path='/articles'
+              component={Articles}
+            />
+
             
               <ProtectedRoute
                 exact
