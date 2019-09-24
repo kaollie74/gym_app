@@ -1,6 +1,6 @@
 const favArticlesReducer = (state=[], action) => {
   switch(action.type) {
-    case 'ADD_FAV_ARTICLE':
+    case 'SET_FAV_ARTICLE':
       return [...state, action.payload];
     default:
       return state;
