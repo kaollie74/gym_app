@@ -8,7 +8,7 @@ class Articles extends Component {
   }
 
   componentDidMount(){
-    //this.props.dispatch({type: 'FETCH_ARTICLES'})
+    this.props.dispatch({type: 'FETCH_ARTICLES'})
   }
   render () {
     return (
