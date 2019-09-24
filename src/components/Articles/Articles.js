@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Button, Card} from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css';
 
 class Articles extends Component {
 
@@ -13,11 +15,13 @@ class Articles extends Component {
   render () {
     return (
       this.props.reduxStore.articles.map(item => { return (
-        <div key={item.id}>
+        <Card key={item.id}>
           {item.title}
           {item.author}
           <img src={item.urlToImage} alt=''/>
-        </div>
+          <a href={item.url}><Button>Read</Button></a>
+   
+        </Card>
       )})
     )
   }
