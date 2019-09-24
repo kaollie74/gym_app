@@ -1,4 +1,5 @@
 import { all } from 'redux-saga/effects';
+import articleSaga from './ArticleSaga';
 import loginSaga from './loginSaga';
 import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
@@ -17,6 +18,7 @@ import GymsNearMeSaga from './GymsNearMeSaga';
 // and login triggers setting the user
 export default function* rootSaga() {
   yield all([
+    articleSaga(),
     loginSaga(),
     registrationSaga(),
     userSaga(),
