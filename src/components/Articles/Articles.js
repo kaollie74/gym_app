@@ -12,7 +12,13 @@ class Articles extends Component {
   }
   render () {
     return (
-      <h1>Articles</h1>
+      this.props.reduxStore.articles.map(item => { return (
+        <div key={item.id}>
+          {item.title}
+          {item.author}
+          <img src={item.urlToImage} alt=''/>
+        </div>
+      )})
     )
   }
 }
