@@ -7,6 +7,21 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 const NEWS_API_KEY = process.env.NEWS_API_KEY;
 
+router.get('/get-fav', rejectUnauthenticated, (req, res)=> {
+  sqlText = `SELECT * from "favorites";`;
+
+  pool.query(sqlText)
+  .then(response => {
+    res.send(response.rows)
+  })
+  .catch(error => {
+    console.log( `Error with GETTING fav articles from DB`, error)
+    res.sendStatus(500);
+  })
+
+
+})
+
 router.post('/', rejectUnauthenticated, (req, res) => {
   //let url = `https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=${NEWS_API_KEY}`;
 
