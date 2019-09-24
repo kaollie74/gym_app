@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import './HomePage.css'
 import WeeklyPage from '../WeeklyPage/WeeklyPage';
 
@@ -139,7 +138,7 @@ class HomePage extends Component {
                     />
                     <Button
                       component={Link}
-                      to='/weekly'
+                      to='/articles'
                       color="primary"
                       className={classes.enter}
                       onClick={this.weeklyRoutine}
