@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import articles from './ArticlesReducer';
 import errors from './errorsReducer';
+import favArticles from './FavArticlesReducer';
 import loginMode from './loginModeReducer';
 import user from './userReducer';
 import routineNames from './RoutineNamesReducer';
@@ -18,6 +19,7 @@ import gymsNearMe from './GymsNearMeReducer';
 const rootReducer = combineReducers({
   articles,
   errors, // contains registrationMessage and loginMessage
+  favArticles,
   loginMode, // will have a value of 'login' or 'registration' to control which screen is shown
   user, // will have an id and username if someone is logged in
   routineNames,
