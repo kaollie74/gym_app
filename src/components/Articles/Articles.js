@@ -12,12 +12,13 @@ class Articles extends Component {
 
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_ARTICLES' })
+    this.props.dispatch({type: 'FETCH_FAV_ARTICLES'})
   }
 
-handleFavorite = (item) => {
-  console.log(`this is favorite`, item)
-  this.props.dispatch({type: 'ADD_FAV_ARTICLE', payload: item})
-}
+  handleFavorite = (item) => {
+    console.log(`this is favorite`, item)
+    this.props.dispatch({ type: 'ADD_FAV_ARTICLE', payload: item })
+  }
 
 
   render() {
@@ -31,9 +32,15 @@ handleFavorite = (item) => {
 
             <Grid.Column key={i}>
               <Card>
-                <Icon name='favorite'
-                  float= 'right'
-                  onClick = {() => this.handleFavorite(item)}
+                <Icon
+                  name='favorite'
+                  color= {this.props.reduxStore.favArticles.map(item2 => {
+
+                    return item2.title === item.title ? 'blue' : ''
+
+                  })}
+                  float='right'
+                  onClick={() => this.handleFavorite(item)}
                 />
                 <h4>{item.title}</h4>
                 <h5>Author:  {item.author}</h5>
