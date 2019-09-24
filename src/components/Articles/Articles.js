@@ -7,18 +7,22 @@ import './Articles.css';
 class Articles extends Component {
 
   state = {
-
+    color: false
   }
 
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_ARTICLES' })
     this.props.dispatch({type: 'FETCH_FAV_ARTICLES'})
+
   }
 
   handleFavorite = (item) => {
     console.log(`this is favorite`, item)
     this.props.dispatch({ type: 'ADD_FAV_ARTICLE', payload: item })
   }
+
+  ///Possible run a function that checks if the article already exists in favorite. This may giv
+  // render time to load correct data. 
 
 
   render() {
@@ -36,7 +40,7 @@ class Articles extends Component {
                   name='favorite'
                   color= {this.props.reduxStore.favArticles.map(item2 => {
 
-                    return item2.title === item.title ? 'blue' : ''
+                     return item2.title === item.title ? 'blue' : ''
 
                   })}
                   float='right'
