@@ -20,4 +20,25 @@ router.post('/', rejectUnauthenticated, (req, res) => {
       res.sendStatus(500)
     })
 });
+
+router.post('/fav', rejectUnauthenticated, (req,res) => {
+
+  console.log('IN ROUTER.POST /FAV', req.body)
+
+  const sqlText = `INSERT INTO "favorites" ("author", "content", "published", "title", "url", "image") 
+                      VALUES($1, $2, $3, $4, $5, $6);`;
+  const values = [req.body.author, req.body.content, req.body.publishedAt, req.body.title, req.body.url, req.body.urlToImage];
+
+  pool.query(sqlText, values)
+  .then(response => {
+    res.sendStatus(200);
+  })
+  .catch(error => {
+    console.log(`Error with POSTING FAV ARTICLE to DB`, error);
+    res.sendStatus(500);
+  })
+
+
+})
+
 module.exports = router;
