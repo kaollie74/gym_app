@@ -2,7 +2,7 @@ import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
 
 function* GymsNearMeSaga() {
-  yield takeEvery('GOOGLE_SEARCH', getSearch)
+  //yield takeEvery('GOOGLE_SEARCH', getSearch)
   yield takeEvery('POST_GOOGLE', postGoogle)
 }
 
