@@ -9,7 +9,7 @@ const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/user.strategy');
 
 // Route includes
-const articlesRouter = './routes/articles.router';
+const articlesRouter = require('./routes/articles.router');
 const userRouter = require('./routes/user.router');
 const routineRouter = require('./routes/routine.router');
 const activityRouter = require('./routes/activity.router');
@@ -33,7 +33,7 @@ app.use('/routine', routineRouter)
 app.use('/activity', activityRouter) 
 app.use('/api/images', imagesRouter)
 app.use('/api/gyms-near-me', gymsRouter)
-app.user('/articles', articlesRouter)
+app.use('/articles', articlesRouter)
 
 // Serve static files
 app.use(express.static('build'));

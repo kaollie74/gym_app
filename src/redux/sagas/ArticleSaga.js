@@ -8,7 +8,8 @@ function* ArticleSaga() {
 
 function* fetchArticles(action){
   try{
-    yield axios.post('/articles', action.payload)
+    const response = yield axios.post('/articles', action.payload)
+    yield put ({type: 'SET_ARTICLES', payload: response.data.articles})
   }
   catch(error){
     console.log(`Error with fetching Articles from API`, error)
