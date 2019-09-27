@@ -4,36 +4,51 @@ import { Button, Card, Grid, Icon, Image } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import './Articles.css';
 
+
 class Articles extends Component {
 
   state = {
-    color: false
+    color: false,
+    //favArticles: this.props.reduxStore.favArticles,
+
   }
 
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_ARTICLES' })
     this.props.dispatch({ type: 'FETCH_FAV_ARTICLES' })
-    this.checkIcon();
+
 
   }
+
+  // componentDidUpdate (prevProps) {
+  //   if(this.props.reduxStore.articles.length !== this.prevProps.reduxStore.aricles.length){
+  //     this.setState({ favArticles:this.props.reduxStpre.favArticles});
+  //   }
+  // }
 
   checkIcon = (item) => {
     let array1 = this.props.reduxStore.articles;
     let array2 = this.props.reduxStore.favArticles;
 
-    // for (let blah of array1) {
-    //   console.log (blah.title)
-    // }
-
-    for (let articleTitle of array1) {
-      for (let favArticleTitle of array2) {
-        if (articleTitle.title == favArticleTitle.title) {
-          return <Icon name='favorite' color='blue' onClick = {() => this.removeFavorite()} />
-        } else if (articleTitle.title !== favArticleTitle.title) {
-          return <Icon name='favorite' color='black' onClick = {() => this.handleFavorite(item)} />
+    for (let i = 0; i < array1.length; i++) {
+      for (let j = 0; j < array2.length; j++) {
+        if (array1[i].publishedAt === array2[j].publishedAt) {
+          return <Icon name='favorite' color='blue' onClick={() => this.removeFavorite()} />
+        } else {
+          return <Icon name='favorite' color='black'  onClick = {() => this.handleFavorite(item)} />
         }
-      }// end of for  
-    } // end of for 
+      }
+    }
+
+    // for (let blah of array1) {
+    //   for (let blah2 of array2) {
+    //     if (blah.publishedAt !== blah2.publishedAt) {
+    //       return <Icon name='favorite' color='black'  onClick = {() => this.handleFavorite(item)} />
+    //     } else {
+    //       return <Icon name='favorite' color='blue' onClick = {() => this.removeFavorite()} />
+    //     }
+    //   }// end of for  
+    // } // end of for 
   } // end checkIcon
 
   handleFavorite = (item) => {
@@ -50,7 +65,11 @@ class Articles extends Component {
     //   }
     // } // end for of
 
-    this.props.dispatch({type: 'ADD_FAV_ARTICLE', payload:item})
+    this.props.dispatch({ type: 'ADD_FAV_ARTICLE', payload: item })
+  }
+
+  removeFavorite = () => {
+    console.log('hello')
   }
 
   ///Possible run a function that checks if the article already exists in favorite. This may giv
@@ -59,7 +78,7 @@ class Articles extends Component {
 
   render() {
 
-    console.log('IM rendering')
+    console.log('IM rendering', this.state)
 
     return (
       <Grid
@@ -71,7 +90,7 @@ class Articles extends Component {
 
             <Grid.Column key={i}>
               <Card>
-                <Icon
+                {/* <Icon
                   name='favorite'
                   color={this.props.reduxStore.favArticles.map(item2 => {
 
@@ -80,9 +99,9 @@ class Articles extends Component {
                   })}
                   float='right'
                   onClick={() => this.handleFavorite(item)}
-                />
+                /> */}
 
-                {/* {this.checkIcon(item)} */}
+                {this.checkIcon(item)}
                 <h4>{item.title}</h4>
                 <h5>Author:  {item.author}</h5>
                 <Image
@@ -93,7 +112,7 @@ class Articles extends Component {
                   rounded
                 />
                 <a
-                  href={item.url}
+                  href= {item.url}
                   className='buttonLink'
                 >
                   <Button
