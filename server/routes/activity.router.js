@@ -58,15 +58,15 @@ router.delete('/delete/:id', rejectUnauthenticated, (req,res) => {
 
   console.log('HITTING THE DELETE ROUTE', req.params.id)
 
-  sqlText = `DELETE FROM "activity" WHERE "id" = $1`
-  value = [req.params.id]
+  const sqlText = `DELETE FROM "activity" WHERE "id" = $1`
+  const value = [req.params.id]
   pool.query(sqlText, value)
   .then((response)=> {
     res.sendStatus(200)
   })
   .catch((error)=> {
     console.log('Error Removing Activity from the Database', error);
-    
+    res.sendStatus(500);
   })
 })
 

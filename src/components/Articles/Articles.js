@@ -12,13 +12,45 @@ class Articles extends Component {
 
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_ARTICLES' })
-    this.props.dispatch({type: 'FETCH_FAV_ARTICLES'})
+    this.props.dispatch({ type: 'FETCH_FAV_ARTICLES' })
+    this.checkIcon();
 
   }
 
+  checkIcon = (item) => {
+    let array1 = this.props.reduxStore.articles;
+    let array2 = this.props.reduxStore.favArticles;
+
+    // for (let blah of array1) {
+    //   console.log (blah.title)
+    // }
+
+    for (let articleTitle of array1) {
+      for (let favArticleTitle of array2) {
+        if (articleTitle.title == favArticleTitle.title) {
+          return <Icon name='favorite' color='blue' onClick = {() => this.removeFavorite()} />
+        } else if (articleTitle.title !== favArticleTitle.title) {
+          return <Icon name='favorite' color='black' onClick = {() => this.handleFavorite(item)} />
+        }
+      }// end of for  
+    } // end of for 
+  } // end checkIcon
+
   handleFavorite = (item) => {
     console.log(`this is favorite`, item)
-    this.props.dispatch({ type: 'ADD_FAV_ARTICLE', payload: item })
+    let array = this.props.reduxStore.favArticles
+    // for (let blah of array) {
+    //   if (item.title === blah.title) {
+
+    //     return this.props.dispatch({ type: 'ADD_FAV_ARTICLE', payload: item })
+
+    //   } else {
+    //     return this.props.dispatch({ type: 'REMOVE_FAV_ARTICLE', payload: blah.id })
+
+    //   }
+    // } // end for of
+
+    this.props.dispatch({type: 'ADD_FAV_ARTICLE', payload:item})
   }
 
   ///Possible run a function that checks if the article already exists in favorite. This may giv
@@ -26,6 +58,9 @@ class Articles extends Component {
 
 
   render() {
+
+    console.log('IM rendering')
+
     return (
       <Grid
         stackable container centered columns={3}
@@ -38,14 +73,16 @@ class Articles extends Component {
               <Card>
                 <Icon
                   name='favorite'
-                  color= {this.props.reduxStore.favArticles.map(item2 => {
+                  color={this.props.reduxStore.favArticles.map(item2 => {
 
-                     return item2.title === item.title ? 'blue' : ''
+                    return item2.title === item.title ? "blue" : "black"
 
                   })}
                   float='right'
                   onClick={() => this.handleFavorite(item)}
                 />
+
+                {/* {this.checkIcon(item)} */}
                 <h4>{item.title}</h4>
                 <h5>Author:  {item.author}</h5>
                 <Image

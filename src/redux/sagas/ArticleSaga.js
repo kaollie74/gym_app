@@ -6,6 +6,7 @@ function* ArticleSaga() {
   yield takeEvery ('FETCH_ARTICLES', fetchArticles)
   yield takeEvery ('ADD_FAV_ARTICLE', addArticle)
   yield takeEvery ('FETCH_FAV_ARTICLES', fetchFavArticles)
+  yield takeEvery ('REMOVE_FAV_ARTICLE', removeFavArticle)
 }
 
 function* addArticle(action) {
@@ -29,9 +30,18 @@ function* fetchArticles(action){
   }
 }
 
+// fetch all favorite articles that reside in the DB
 function* fetchFavArticles () {
   const response = yield axios.get('/articles/get-fav/')
   yield put ({type: 'SET_FAV_ARTICLES', payload: response.data})
+}
+
+function* removeFavArticle (action) {
+
+  console.log('IN removeFavArticle', action.payload.id)
+
+  yield axios.delete(`/articles/delete/${action.payload.id}`)
+  yield put({type:`FETCH_FAV_ARTICLES`})
 }
 
 export default ArticleSaga;
