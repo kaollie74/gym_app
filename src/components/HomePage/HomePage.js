@@ -72,7 +72,13 @@ const styles = theme => ({
 
 
 
+
+
 class HomePage extends Component {
+
+  componentDidtMount() {
+    this.props.dispatch({ type: 'FETCH_FAV_ARTICLES' })
+  }
 
   render() {
     const { classes } = this.props;
