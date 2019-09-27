@@ -7,6 +7,25 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 const NEWS_API_KEY = process.env.NEWS_API_KEY;
 
+router.delete('/delete/:id', rejectUnauthenticated, (req,res) => {
+
+  console.log(`In router.delete:id articles`,  req.params.id)
+  const sqlText = `DELETE FROM "favorites" WHERE "id" = $1;`;
+  const value = [req.params.id];
+
+  pool.query(sqlText, value)
+  .then(response => {
+    res.sendStatus(200);
+  })
+  .catch(error => {
+    console.log(`Error Removing Article from "favorites" table`, error);
+    res.sendStatus(500);
+  })
+  
+
+
+})
+
 router.get('/get-fav', rejectUnauthenticated, (req, res)=> {
   sqlText = `SELECT * from "favorites";`;
 
