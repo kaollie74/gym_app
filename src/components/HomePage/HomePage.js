@@ -192,7 +192,7 @@ class HomePage extends Component {
           {/* <div>
             <LogOutButton className="log-in" />
           </div> */}
-
+          <Button color='primary' variant='contained' component={Link} to='/fav-articles'>Fave Articles</Button>
         </Grid>
       </div>
 

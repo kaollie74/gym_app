@@ -14,6 +14,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import Articles from '../Articles/Articles';
 import RoutineDatabasePage from '../RoutineDatabasePage/RoutineDatabasePage';
 import HomePage from '../HomePage/HomePage';
+import FaveArticles from '../FavArticles/FavArticles';
 import WeeklyPage from '../WeeklyPage/WeeklyPage';
 import RoutineNamePage from '../RoutineNamePage/RoutineNamePage';
 import RoutinePage from '../RoutinePage/RoutinePage';
@@ -64,19 +65,25 @@ class App extends Component {
               component={Articles}
             />
 
-            
-              <ProtectedRoute
-                exact
-                path="/name"
-                render={(props)=> <RoutineNamePage {...props}/>} />
-            
+            <ProtectedRoute
+              exact
+              path='/fav-articles'
+              component={FaveArticles}
+            />
 
-            
-              <ProtectedRoute
-                exact
-                path="/routine"
-                component={RoutinePage} />
-            
+
+            <ProtectedRoute
+              exact
+              path="/name"
+              render={(props) => <RoutineNamePage {...props} />} />
+
+
+
+            <ProtectedRoute
+              exact
+              path="/routine"
+              component={RoutinePage} />
+
 
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
