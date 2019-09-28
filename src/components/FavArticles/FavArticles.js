@@ -6,16 +6,20 @@ import 'semantic-ui-css/semantic.min.css';
 
 class FavArticles extends Component {
 
-  componentDidMount () {
-    this.props.dispatch({type: 'FETCH_FAV_ARTICLES'})
+  componentDidMount() {
+    this.props.dispatch({ type: 'FETCH_FAV_ARTICLES' })
+  }
+
+  removeFavArticle = () => {
+    console.log('in removeFavArticle')
   }
 
   render() {
     return (
       <>
-        <h1>Your Favorite Articles</h1>
+        <h1 style={{color: 'white'}}>Your Favorite Articles</h1>
         <div>
-          {this.props.reduxStore.favArticles.map((item,i) => {
+          {this.props.reduxStore.favArticles.map((item, i) => {
             return (
               <Card key={i}>
                 <h4>{item.title}</h4>
@@ -26,8 +30,17 @@ class FavArticles extends Component {
                   size='medium'
                   rounded
                 />
+              <div>
+                <a
+                  href={item.url}
+                >
+                  <Button>
+                    Read
+                  </Button>
+                </a>
 
-                <Button>Read</Button>
+                <Button onClick={() => this.removeFavArticle(item)}>Remove</Button>
+                </div>
 
               </Card>
             )// end return in .map
