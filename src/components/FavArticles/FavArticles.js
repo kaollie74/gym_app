@@ -10,8 +10,9 @@ class FavArticles extends Component {
     this.props.dispatch({ type: 'FETCH_FAV_ARTICLES' })
   }
 
-  removeFavArticle = () => {
-    console.log('in removeFavArticle')
+  removeFavArticle = (item) => {
+    console.log('in removeFavArticle', item)
+    this.props.dispatch({type: 'REMOVE_FAV_ARTICLE', payload: item})
   }
 
   render() {
