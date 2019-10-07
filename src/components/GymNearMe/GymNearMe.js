@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import CurrentLocation from '../Map/Map';
 
-import PlacesAutocomplete, { geocodeByAddress, geocodeByPlaceId, getLatLng, } from 'react-places-autocomplete';
+// import PlacesAutocomplete, { geocodeByAddress, geocodeByPlaceId, getLatLng, } from 'react-places-autocomplete';
+
 require('dotenv').config();
+const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
 const mapStyles = {
   width: '80%',
@@ -63,7 +65,7 @@ class GymNearMe extends Component {
           rating={'Rating: ' + item.rating}
           address={'Address: ' + item.formatted_address}
           onClick={this.clickedMe}
-          //button={<button onClick={ (event) => this.blah(item, event)}>Hello</button>}
+        //button={<button onClick={ (event) => this.blah(item, event)}>Hello</button>}
 
         />
 
@@ -184,4 +186,4 @@ const mapStateToProps = reduxStore => ({
   reduxStore
 });
 
-export default GoogleApiWrapper({ apiKey: 'AIzaSyDmyWdxkXB_xVVFFpUVwp3xye2HCUrLv-Q' })(connect(mapStateToProps)(GymNearMe));
+export default GoogleApiWrapper({ apiKey: GOOGLE_API_KEY })(connect(mapStateToProps)(GymNearMe));
