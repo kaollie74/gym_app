@@ -100,7 +100,7 @@ class HomePage extends Component {
                 <Card
                   img src="/images/barbellsolo.jpg"
                   className={classes.card}
-                  // className = 'buildRoutineCard'
+                // className = 'buildRoutineCard'
                 >
                   <CardContent
                     className={classes.cardContent}
@@ -192,7 +192,14 @@ class HomePage extends Component {
           {/* <div>
             <LogOutButton className="log-in" />
           </div> */}
-          <Button color='primary' variant='contained' component={Link} to='/fav-articles'>Fave Articles</Button>
+          <Button
+            color='primary'
+            variant='contained'
+            component={Link}
+            to='/fav-articles'
+          >
+            Fave Articles
+          </Button>
         </Grid>
       </div>
 

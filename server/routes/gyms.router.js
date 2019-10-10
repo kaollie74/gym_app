@@ -10,6 +10,8 @@ const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 router.post('/', rejectUnauthenticated, (req, res) => {
   console.log('hitting search post', req.body)
 
+  console.log(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${req.body.search}&type=gym&radius=8000&key=${GOOGLE_API_KEY}`)
+
   axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${req.body.search}&type=gym&radius=8000&key=${GOOGLE_API_KEY}`)
 
     .then((response) => {
